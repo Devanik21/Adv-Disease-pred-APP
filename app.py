@@ -3,10 +3,10 @@ import pandas as pd
 import joblib
 
 # Load the dataset
-df = pd.read_csv("C:\\imp\\ml JUPYTER\\MY ML PROJECTS(BOOK)\\3.Deep learning\\ANN\\Recreation\\Disease\\Disease APP\\disease.csv")
+df = pd.read_csv("disease.csv")
 
 # Load the trained model (adjust the path to where your model is saved)
-model = joblib.load("C:\\imp\\ml JUPYTER\\MY ML PROJECTS(BOOK)\\3.Deep learning\\ANN\\Recreation\\Disease\\Disease APP\\RF_Disease_pred.pkl")  # Replace with your actual model path
+model = joblib.load("RF_Disease_pred.pkl")  # Replace with your actual model path
 
 # Title of the web app
 st.title("Disease Prediction Web App")
