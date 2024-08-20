@@ -3,10 +3,10 @@ import pandas as pd
 import joblib
 
 # Load the dataset
-df = pd.read_csv("disease.csv")
+df = pd.read_csv("C:\\imp\\ml JUPYTER\\MY ML PROJECTS(BOOK)\\3.Deep learning\\ANN\\Recreation\\Disease\\Disease APP\\disease.csv")  # Update with the correct path if needed
 
 # Load the trained model (adjust the path to where your model is saved)
-model = joblib.load("RF_Disease_pred.pkl")  # Replace with your actual model path
+model = joblib.load("C:\\imp\\ml JUPYTER\\MY ML PROJECTS(BOOK)\\3.Deep learning\\ANN\\Recreation\\Disease\\Disease APP\\RF_Disease_pred.pkl")  # Replace with your actual model path
 
 # Title of the web app
 st.title("Disease Prediction Web App")
@@ -20,17 +20,8 @@ def user_input_features():
     
     # Assuming the last column is 'prognosis' and the rest are features
     for col in df.columns[:-1]:  # Exclude the target column
-        # Handling different types of features (numeric, categorical)
-        if df[col].dtype == 'object':
-            # For categorical features, use a select box
-            unique_values = df[col].unique()
-            features[col] = st.sidebar.selectbox(f"{col}", unique_values)
-        else:
-            # For numeric features, use a slider
-            min_value = float(df[col].min())
-            max_value = float(df[col].max())
-            default_value = float(df[col].mean())
-            features[col] = st.sidebar.slider(f"{col}", min_value, max_value, default_value)
+        # All features are binary (0 or 1), so use a slider with values 0 and 1
+        features[col] = st.sidebar.slider(f"{col}", 0, 1, 0)
 
     input_df = pd.DataFrame(features, index=[0])
     return input_df
