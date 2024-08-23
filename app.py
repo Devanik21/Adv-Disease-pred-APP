@@ -9,6 +9,13 @@ df = pd.read_csv("disease.csv")  # Update with the correct path if needed
 # Load the trained model (adjust the path to where your model is saved)
 model = joblib.load("RF_Disease_pred.pkl")  # Replace with your actual model path
 
+
+st.set_page_config(
+    page_title="Disease Prediction APP",
+    page_icon="🧬",
+    layout="wide",
+    initial_sidebar_state="expanded",
+)
 # Title of the web app with styling
 st.markdown("""
     <style>
