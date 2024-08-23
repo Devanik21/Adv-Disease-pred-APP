@@ -33,7 +33,7 @@ st.markdown("""
         color: #808080;
     }
     .sidebar {
-        background-color: #004b8c;
+        background-color: #00000;
     }
     </style>
     """, unsafe_allow_html=True)
@@ -73,7 +73,7 @@ with st.spinner('Making prediction...'):
 st.subheader('Prediction Result')
 
 # Customize the prediction message
-st.markdown(f'<div class="result">🩺 The predicted disease based on the input features is: **{prediction[0]}**</div>', unsafe_allow_html=True)
+st.markdown(f'<div class="result">🩺 The predicted disease based on the input features is:  {prediction[0]}</div>', unsafe_allow_html=True)
 
 # Optionally, you can add more details or a description below the result
 st.markdown("""
