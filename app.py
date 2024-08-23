@@ -11,12 +11,13 @@ model = joblib.load("RF_Disease_pred.pkl")  # Replace with your actual model pat
 
 # Set page configuration
 st.set_page_config(
-    page_title="Disease Prediction APP",
+    page_title="Disease Prediction App",
     page_icon="🧬",
     layout="wide",
     initial_sidebar_state="expanded",
 )
 
+# Define color and severity mappings
 severity_colors = {
     'Low': '#90EE90',        # Light Green
     'Medium': '#FFFF00',     # Yellow
@@ -25,76 +26,74 @@ severity_colors = {
     'Severe': '#FF4500',     # Orange Red
     'Critical': '#FF0000'    # Red
 }
-# Define color and severity mappings
+
 disease_colors = {
-    'Sudden Fever': '#FF4500',
-    'Headache': '#FF6347',
-    'Mouth Bleed': '#FFD700',
-    'Nose Bleed': '#DAA520',
-    'Muscle Pain': '#FF8C00',
-    'Joint Pain': '#FF1493',
-    'Vomiting': '#FF69B4',
-    'Rash': '#FFB6C1',
-    'Diarrhea': '#FF6347',
-    'Hypotension': '#FF4500',
-    'Pleural Effusion': '#FF69B4',
-    'Ascites': '#FF69B4',
-    'Gastro Bleeding': '#FF69B4',
-    'Swelling': '#DAA520',
-    'Nausea': '#FF6347',
-    'Chills': '#FFB6C1',
-    'Myalgia': '#FF6347',
-    'Digestion Trouble': '#DAA520',
-    'Fatigue': '#FF6347',
-    'Skin Lesions': '#DAA520',
-    'Stomach Pain': '#DAA520',
-    'Orbital Pain': '#FF6347',
-    'Neck Pain': '#FFB6C1',
-    'Weakness': '#FF4500',
-    'Back Pain': '#FFB6C1',
-    'Weight Loss': '#DAA520',
-    'Gum Bleed': '#FF69B4',
-    'Jaundice': '#FF69B4',
-    'Coma': '#FF0000',
-    'Dizziness': '#FF6347',
-    'Inflammation': '#DAA520',
-    'Red Eyes': '#FF6347',
-    'Loss of Appetite': '#FF6347',
-    'Urination Loss': '#FF69B4',
-    'Slow Heart Rate': '#FF4500',
-    'Abdominal Pain': '#DAA520',
-    'Light Sensitivity': '#FFB6C1',
-    'Yellow Skin': '#FF69B4',
-    'Yellow Eyes': '#FF69B4',
-    'Facial Distortion': '#FF69B4',
-    'Microcephaly': '#FF0000',
-    'Rigor': '#FF4500',
-    'Bitter Tongue': '#FF6347',
-    'Convulsion': '#FF0000',
-    'Anemia': '#DAA520',
-    'Cocacola Urine': '#FF69B4',
-    'Hypoglycemia': '#FF4500',
-    'Prostraction': '#FF0000',
-    'Hyperpyrexia': '#FF0000',
-    'Stiff Neck': '#FF4500',
-    'Irritability': '#FF6347',
-    'Confusion': '#FF69B4',
-    'Tremor': '#FF6347',
-    'Paralysis': '#FF0000',
-    'Lymph Swells': '#DAA520',
-    'Breathing Restriction': '#FF69B4',
-    'Toe Inflammation': '#FFB6C1',
-    'Finger Inflammation': '#FFB6C1',
-    'Lips Irritation': '#FFB6C1',
-    'Itchiness': '#FFB6C1',
-    'Ulcers': '#DAA520',
-    'Toenail Loss': '#FFB6C1',
-    'Speech Problem': '#FF69B4',
-    'Bullseye Rash': '#DAA520',
-    'Dengue': '#FF69B4'
+    'Sudden Fever': severity_colors['High'],
+    'Headache': severity_colors['Medium'],
+    'Mouth Bleed': severity_colors['Severe'],
+    'Nose Bleed': severity_colors['Moderate'],
+    'Muscle Pain': severity_colors['Low'],
+    'Joint Pain': severity_colors['Medium'],
+    'Vomiting': severity_colors['High'],
+    'Rash': severity_colors['Low'],
+    'Diarrhea': severity_colors['Moderate'],
+    'Hypotension': severity_colors['High'],
+    'Pleural Effusion': severity_colors['Severe'],
+    'Ascites': severity_colors['Severe'],
+    'Gastro Bleeding': severity_colors['Severe'],
+    'Swelling': severity_colors['Moderate'],
+    'Nausea': severity_colors['Medium'],
+    'Chills': severity_colors['Low'],
+    'Myalgia': severity_colors['Medium'],
+    'Digestion Trouble': severity_colors['Moderate'],
+    'Fatigue': severity_colors['Medium'],
+    'Skin Lesions': severity_colors['Moderate'],
+    'Stomach Pain': severity_colors['Moderate'],
+    'Orbital Pain': severity_colors['Medium'],
+    'Neck Pain': severity_colors['Low'],
+    'Weakness': severity_colors['High'],
+    'Back Pain': severity_colors['Low'],
+    'Weight Loss': severity_colors['Moderate'],
+    'Gum Bleed': severity_colors['Severe'],
+    'Jaundice': severity_colors['Severe'],
+    'Coma': severity_colors['Critical'],
+    'Dizziness': severity_colors['Medium'],
+    'Inflammation': severity_colors['Moderate'],
+    'Red Eyes': severity_colors['Medium'],
+    'Loss of Appetite': severity_colors['Medium'],
+    'Urination Loss': severity_colors['Severe'],
+    'Slow Heart Rate': severity_colors['High'],
+    'Abdominal Pain': severity_colors['Moderate'],
+    'Light Sensitivity': severity_colors['Low'],
+    'Yellow Skin': severity_colors['Severe'],
+    'Yellow Eyes': severity_colors['Severe'],
+    'Facial Distortion': severity_colors['Severe'],
+    'Microcephaly': severity_colors['Critical'],
+    'Rigor': severity_colors['High'],
+    'Bitter Tongue': severity_colors['Medium'],
+    'Convulsion': severity_colors['Critical'],
+    'Anemia': severity_colors['Moderate'],
+    'Cocacola Urine': severity_colors['Severe'],
+    'Hypoglycemia': severity_colors['High'],
+    'Prostraction': severity_colors['Critical'],
+    'Hyperpyrexia': severity_colors['Critical'],
+    'Stiff Neck': severity_colors['High'],
+    'Irritability': severity_colors['Medium'],
+    'Confusion': severity_colors['Severe'],
+    'Tremor': severity_colors['Medium'],
+    'Paralysis': severity_colors['Critical'],
+    'Lymph Swells': severity_colors['Moderate'],
+    'Breathing Restriction': severity_colors['Severe'],
+    'Toe Inflammation': severity_colors['Low'],
+    'Finger Inflammation': severity_colors['Low'],
+    'Lips Irritation': severity_colors['Low'],
+    'Itchiness': severity_colors['Low'],
+    'Ulcers': severity_colors['Moderate'],
+    'Toenail Loss': severity_colors['Low'],
+    'Speech Problem': severity_colors['Severe'],
+    'Bullseye Rash': severity_colors['Moderate'],
+    'Dengue': severity_colors['Severe']
 }
-
-
 
 disease_severity = {
     'Sudden Fever': 'High',
@@ -164,7 +163,6 @@ disease_severity = {
     'Dengue': 'Severe'
 }
 
-
 # Title of the web app with styling
 st.markdown("""
     <style>
@@ -194,60 +192,135 @@ st.markdown("""
     .disease-medium { color: #FFD700; }
     .disease-low { color: #32CD32; }
     .disease-severe { color: #FF4500; }
+    .disease-critical { color: #FF0000; }
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+    .input-card {
+        background-color: #f5f5f5;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .result-card {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        width: 80%;
+    }
     </style>
+    <div class="title">Disease Prediction App</div>
     """, unsafe_allow_html=True)
 
-# Title of the web app
-st.markdown('<div class="title">Disease Prediction Web App</div>', unsafe_allow_html=True)
+# Sidebar for navigation
+with st.sidebar:
+    st.header("Navigation")
+    st.markdown("- [Home](#)")
+    st.markdown("- [Prediction](#)")
+    st.markdown("- [Insights](#)")
+    st.markdown("- [About](#)")
 
-# Sidebar for user input
-st.sidebar.header("Input Features")
+st.markdown("## Predict Your Disease")
+st.markdown("Fill out the form below to get a prediction.")
 
-def user_input_features():
-    # Create a dictionary to hold feature inputs
-    features = {}
+# User input form
+with st.form(key='prediction_form', clear_on_submit=True):
+    st.subheader("Please select your symptoms:")
+    symptoms = {
+        'Sudden Fever': st.checkbox('Sudden Fever'),
+        'Headache': st.checkbox('Headache'),
+        'Mouth Bleed': st.checkbox('Mouth Bleed'),
+        'Nose Bleed': st.checkbox('Nose Bleed'),
+        'Muscle Pain': st.checkbox('Muscle Pain'),
+        'Joint Pain': st.checkbox('Joint Pain'),
+        'Vomiting': st.checkbox('Vomiting'),
+        'Rash': st.checkbox('Rash'),
+        'Diarrhea': st.checkbox('Diarrhea'),
+        'Hypotension': st.checkbox('Hypotension'),
+        'Pleural Effusion': st.checkbox('Pleural Effusion'),
+        'Ascites': st.checkbox('Ascites'),
+        'Gastro Bleeding': st.checkbox('Gastro Bleeding'),
+        'Swelling': st.checkbox('Swelling'),
+        'Nausea': st.checkbox('Nausea'),
+        'Chills': st.checkbox('Chills'),
+        'Myalgia': st.checkbox('Myalgia'),
+        'Digestion Trouble': st.checkbox('Digestion Trouble'),
+        'Fatigue': st.checkbox('Fatigue'),
+        'Skin Lesions': st.checkbox('Skin Lesions'),
+        'Stomach Pain': st.checkbox('Stomach Pain'),
+        'Orbital Pain': st.checkbox('Orbital Pain'),
+        'Neck Pain': st.checkbox('Neck Pain'),
+        'Weakness': st.checkbox('Weakness'),
+        'Back Pain': st.checkbox('Back Pain'),
+        'Weight Loss': st.checkbox('Weight Loss'),
+        'Gum Bleed': st.checkbox('Gum Bleed'),
+        'Jaundice': st.checkbox('Jaundice'),
+        'Coma': st.checkbox('Coma'),
+        'Dizziness': st.checkbox('Dizziness'),
+        'Inflammation': st.checkbox('Inflammation'),
+        'Red Eyes': st.checkbox('Red Eyes'),
+        'Loss of Appetite': st.checkbox('Loss of Appetite'),
+        'Urination Loss': st.checkbox('Urination Loss'),
+        'Slow Heart Rate': st.checkbox('Slow Heart Rate'),
+        'Abdominal Pain': st.checkbox('Abdominal Pain'),
+        'Light Sensitivity': st.checkbox('Light Sensitivity'),
+        'Yellow Skin': st.checkbox('Yellow Skin'),
+        'Yellow Eyes': st.checkbox('Yellow Eyes'),
+        'Facial Distortion': st.checkbox('Facial Distortion'),
+        'Microcephaly': st.checkbox('Microcephaly'),
+        'Rigor': st.checkbox('Rigor'),
+        'Bitter Tongue': st.checkbox('Bitter Tongue'),
+        'Convulsion': st.checkbox('Convulsion'),
+        'Anemia': st.checkbox('Anemia'),
+        'Cocacola Urine': st.checkbox('Cocacola Urine'),
+        'Hypoglycemia': st.checkbox('Hypoglycemia'),
+        'Prostraction': st.checkbox('Prostraction'),
+        'Hyperpyrexia': st.checkbox('Hyperpyrexia'),
+        'Stiff Neck': st.checkbox('Stiff Neck'),
+        'Irritability': st.checkbox('Irritability'),
+        'Confusion': st.checkbox('Confusion'),
+        'Tremor': st.checkbox('Tremor'),
+        'Paralysis': st.checkbox('Paralysis'),
+        'Lymph Swells': st.checkbox('Lymph Swells'),
+        'Breathing Restriction': st.checkbox('Breathing Restriction'),
+        'Toe Inflammation': st.checkbox('Toe Inflammation'),
+        'Finger Inflammation': st.checkbox('Finger Inflammation'),
+        'Lips Irritation': st.checkbox('Lips Irritation'),
+        'Itchiness': st.checkbox('Itchiness'),
+        'Ulcers': st.checkbox('Ulcers'),
+        'Toenail Loss': st.checkbox('Toenail Loss'),
+        'Speech Problem': st.checkbox('Speech Problem'),
+        'Bullseye Rash': st.checkbox('Bullseye Rash'),
+        'Dengue': st.checkbox('Dengue')
+    }
+    submit_button = st.form_submit_button(label='Predict Disease')
+
+# Disease prediction logic
+if submit_button:
+    selected_symptoms = [symptom for symptom, selected in symptoms.items() if selected]
+    input_data = np.array([selected_symptoms]).reshape(1, -1)
     
-    # Assuming the last column is 'prognosis' and the rest are features
-    for col in df.columns[:-1]:  # Exclude the target column
-        # All features are binary (0 or 1), so use a slider with values 0 and 1
-        features[col] = st.sidebar.slider(f"{col}", 0, 1, 0)
+    # Predict
+    prediction = model.predict(input_data)[0]
+    probability = model.predict_proba(input_data).max() * 100
 
-    input_df = pd.DataFrame(features, index=[0])
-    return input_df
+    # Display results
+    st.markdown("## Prediction Result")
+    st.markdown(f"<div class='result' style='background-color:{disease_colors.get(prediction, '#FFFFFF')}; padding: 10px;'>")
+    st.markdown(f"**Predicted Disease:** {prediction}")
+    st.markdown(f"**Probability:** {probability:.2f}%")
+    st.markdown("</div>", unsafe_allow_html=True)
+    
+    st.markdown("### Note:")
+    st.markdown("This prediction is based on the input symptoms and the trained model. For accurate diagnosis, please consult a healthcare professional.")
 
-# Get user input
-input_df = user_input_features()
-
-# Display user input
-st.subheader('User Input Features')
-st.write(input_df)
-
-# Show loading spinner
-with st.spinner('Making prediction...'):
-    # Make prediction
-    prediction = model.predict(input_df)
-
-# Display the prediction result
-st.subheader('Prediction Result')
-
-# Display prediction with dynamic color and severity
-def get_color_and_severity(disease):
-    color = disease_colors.get(disease, '#000000')  # Default to black if not found
-    severity = disease_severity.get(disease, 'Unknown')
-    return color, severity
-
-disease = prediction[0]
-color, severity = get_color_and_severity(disease)
-
-st.markdown(f'<div class="result" style="color:{color};">🩺 The predicted disease based on the input features is: <strong>{disease}</strong></div>', unsafe_allow_html=True)
-st.markdown(f'<div class="result" style="color:{color};">Severity: <strong>{severity}</strong></div>', unsafe_allow_html=True)
-
-# Optionally, you can add more details or a description below the result
+# Add About section
+st.markdown("## About")
 st.markdown("""
-    <div class="note">
-        <strong>Note:</strong> The prediction is based on the model's analysis of the provided symptoms. For accurate diagnosis, please consult a healthcare professional.
-    </div>
-    """, unsafe_allow_html=True)
-
-# Add an image or additional content
-st.image("DNA.jpg", caption="Health and Wellness", use_column_width=True)
+    This application uses a Random Forest classifier to predict diseases based on symptoms. 
+    The model is trained on historical disease data to provide accurate predictions.
+    """)
