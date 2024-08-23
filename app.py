@@ -83,6 +83,7 @@ disease_colors = {
     'Toenail Loss': '#FFB6C1',        # LightPink (Same as Rash for consistency)
     'Speech Problem': '#FF6347',      # Tomato (Same as Headache for consistency)
     'Bullseye Rash': '#FF4500'        # OrangeRed (Same as Sudden Fever for consistency)
+    'Dengue':'#DAA520';
 }
 
 
