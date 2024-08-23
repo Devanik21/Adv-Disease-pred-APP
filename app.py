@@ -43,7 +43,6 @@ st.markdown('<div class="title">Disease Prediction Web App</div>', unsafe_allow_
 
 # Sidebar for user input
 st.sidebar.header("Input Features")
-st.sidebar.markdown("<div class='sidebar'>Please enter the details below to get the disease prediction.</div>", unsafe_allow_html=True)
 
 def user_input_features():
     # Create a dictionary to hold feature inputs
