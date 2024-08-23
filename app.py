@@ -84,7 +84,8 @@ disease_colors = {
     'Speech Problem': '#FF69B4',
     'Bullseye Rash': '#DAA520',
     'Dengue': '#FF69B4',
-    'Chikungunya': '#DAA520'
+    'Chikungunya': '#DAA520',
+    'Yellow Fever': '#DAA520'
 }
 
 disease_severity = {
