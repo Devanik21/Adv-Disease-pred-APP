@@ -33,7 +33,7 @@ st.markdown("""
         color: #808080;
     }
     .sidebar {
-        background-color: #f0f8ff;
+        background-color: #004b8c;
     }
     </style>
     """, unsafe_allow_html=True)
