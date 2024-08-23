@@ -150,8 +150,10 @@ disease_severity = {
     'Ulcers': 'Moderate',
     'Toenail Loss': 'Low',
     'Speech Problem': 'Severe',
-    'Bullseye Rash': 'Moderate'
+    'Bullseye Rash': 'Moderate',
+    'Dengue': 'Severe'
 }
+
 
 # Title of the web app with styling
 st.markdown("""
