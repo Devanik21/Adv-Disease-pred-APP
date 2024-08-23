@@ -91,7 +91,8 @@ disease_colors = {
     'Toenail Loss': '#FFB6C1',
     'Speech Problem': '#FF69B4',
     'Bullseye Rash': '#DAA520',
-    'Dengue': '#FF69B4'
+    'Dengue': '#FF69B4',
+     'Chikungunya': '#DAA520'
 }
 
 
@@ -162,6 +163,8 @@ disease_severity = {
     'Speech Problem': 'Severe',
     'Bullseye Rash': 'Moderate',
     'Dengue': 'Severe'
+     'Chikungunya':'Rare'
+     'Chikungunya': 'Extremely rare'
 }
 
 
