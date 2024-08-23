@@ -162,7 +162,7 @@ disease_severity = {
     'Speech Problem': 'Severe',
     'Bullseye Rash': 'Moderate',
     'Dengue': 'Severe',
-    'Chikungunya':'Rare'
+    'Chikungunya':'Critical'
 }
 
 # Title of the web app with styling
