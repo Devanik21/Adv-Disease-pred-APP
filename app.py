@@ -17,14 +17,6 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-severity_colors = {
-    'Low': '#90EE90',        # Light Green
-    'Medium': '#FFFF00',     # Yellow
-    'High': '#FF6347',       # Tomato
-    'Moderate': '#FFA07A',   # Light Salmon
-    'Severe': '#FF4500',     # Orange Red
-    'Critical': '#FF0000'    # Red
-}
 # Define color and severity mappings
 disease_colors = {
     'Sudden Fever': '#FF4500',
@@ -92,10 +84,8 @@ disease_colors = {
     'Speech Problem': '#FF69B4',
     'Bullseye Rash': '#DAA520',
     'Dengue': '#FF69B4',
-     'Chikungunya': '#DAA520'
+    'Chikungunya': '#DAA520'
 }
-
-
 
 disease_severity = {
     'Sudden Fever': 'High',
@@ -163,32 +153,36 @@ disease_severity = {
     'Speech Problem': 'Severe',
     'Bullseye Rash': 'Moderate',
     'Dengue': 'Severe',
-     'Chikungunya':'Rare'
-     
+    'Chikungunya': 'Rare'
 }
 
-
-# Title of the web app with styling
+# Title of the web app with updated styling
 st.markdown("""
     <style>
     .title {
-        font-size: 32px;
+        font-size: 36px;
         font-weight: bold;
-        color: #FF6347;
+        color: #FF4500;
         text-align: center;
         margin-bottom: 20px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
     }
     .subheader {
         color: #4682B4;
-        font-size: 24px;
+        font-size: 26px;
+        margin-top: 20px;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
     }
     .result {
-        font-size: 20px;
+        font-size: 22px;
         font-weight: bold;
+        padding: 10px;
+        border-radius: 10px;
     }
     .note {
-        font-size: 16px;
+        font-size: 18px;
         color: #808080;
+        margin-top: 10px;
     }
     .sidebar {
         background-color: #f0f8ff;
@@ -197,6 +191,7 @@ st.markdown("""
     .disease-medium { color: #FFD700; }
     .disease-low { color: #32CD32; }
     .disease-severe { color: #FF4500; }
+    .disease-critical { color: #FF0000; }
     </style>
     """, unsafe_allow_html=True)
 
@@ -213,7 +208,7 @@ def user_input_features():
     # Assuming the last column is 'prognosis' and the rest are features
     for col in df.columns[:-1]:  # Exclude the target column
         # All features are binary (0 or 1), so use a slider with values 0 and 1
-        features[col] = st.sidebar.slider(f"{col}", 0, 1, 0)
+        features[col] = st.sidebar.slider(f"{col}", 0, 1, 0, help=f"Adjust the slider to input for {col}", key=col)
 
     input_df = pd.DataFrame(features, index=[0])
     return input_df
@@ -242,8 +237,11 @@ def get_color_and_severity(disease):
 disease = prediction[0]
 color, severity = get_color_and_severity(disease)
 
-st.markdown(f'<div class="result" style="color:{color};">🩺 The predicted disease based on the input features is: <strong>{disease}</strong></div>', unsafe_allow_html=True)
-st.markdown(f'<div class="result" style="color:{color};">Severity: <strong>{severity}</strong></div>', unsafe_allow_html=True)
+# Use dynamic class for severity color
+severity_class = f"disease-{severity.lower()}"
+
+st.markdown(f'<div class="result {severity_class}" style="background-color:{color};">🩺 The predicted disease based on the input features is: <strong>{disease}</strong></div>', unsafe_allow_html=True)
+st.markdown(f'<div class="result {severity_class}" style="background-color:{color};">Severity: <strong>{severity}</strong></div>', unsafe_allow_html=True)
 
 # Optionally, you can add more details or a description below the result
 st.markdown("""
