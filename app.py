@@ -162,9 +162,9 @@ disease_severity = {
     'Toenail Loss': 'Low',
     'Speech Problem': 'Severe',
     'Bullseye Rash': 'Moderate',
-    'Dengue': 'Severe'
+    'Dengue': 'Severe',
      'Chikungunya':'Rare'
-     'Chikungunya': 'Extremely rare'
+     
 }
 
 
