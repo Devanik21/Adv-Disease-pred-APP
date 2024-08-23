@@ -17,6 +17,14 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
+severity_colors = {
+    'Low': '#90EE90',        # Light Green
+    'Medium': '#FFFF00',     # Yellow
+    'High': '#FF6347',       # Tomato
+    'Moderate': '#FFA07A',   # Light Salmon
+    'Severe': '#FF4500',     # Orange Red
+    'Critical': '#FF0000'    # Red
+}
 # Define color and severity mappings
 disease_colors = {
     'Sudden Fever': '#FF4500',
