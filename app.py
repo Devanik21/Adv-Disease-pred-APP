@@ -9,7 +9,6 @@ df = pd.read_csv("disease.csv")  # Update with the correct path if needed
 # Load the trained model (adjust the path to where your model is saved)
 model = joblib.load("RF_Disease_pred.pkl")  # Replace with your actual model path
 
-
 # Set page configuration
 st.set_page_config(
     page_title="Disease Prediction APP",
@@ -252,14 +251,6 @@ st.markdown("""
         <strong>Note:</strong> The prediction is based on the model's analysis of the provided symptoms. For accurate diagnosis, please consult a healthcare professional.
     </div>
     """, unsafe_allow_html=True)
-# Example of using a multi-select box for symptoms
-selected_symptoms = st.sidebar.multiselect('Select Symptoms', options=df.columns[:-1])
-for symptom in selected_symptoms:
-    features[symptom] = 1
-
-input_df = pd.DataFrame(features, index=[0])
-
-
 
 # Add an image or additional content
 st.image("DNA.jpg", caption="Health and Wellness", use_column_width=True)
