@@ -83,4 +83,5 @@ st.markdown("""
     """, unsafe_allow_html=True)
 
 # Add an image or additional content
-st.image("https://via.placeholder.com/800x400", caption="Health and Wellness", use_column_width=True)
+st.image("DNA.jpg", caption="Health and Wellness", use_column_width=True)
+
