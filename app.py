@@ -246,7 +246,7 @@ st.markdown(f'<div class="result" style="color:{severity_colors.get(severity, "#
 # Optionally, you can add more details or a description below the result
 st.markdown("""
     <div class="note">
-        <strong>Note:</strong> The prediction is based on the model's analysis of the provided symptoms. For accurate diagnosis, please consult a healthcare professional. 🩺
+        <strong>Note:</strong> The prediction is based on the model's analysis of the provided symptoms. For accurate diagnosis, please consult a healthcare professional. 
     </div>
     """, unsafe_allow_html=True)
 
