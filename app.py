@@ -19,18 +19,72 @@ st.set_page_config(
 
 # Define color and severity mappings
 disease_colors = {
-    'Sudden Fever': '#FF4500',
-    'Headache': '#FF6347',
-    'Mouth Bleed': '#FFD700',
-    'Nose Bleed': '#DAA520',
-    'Muscle Pain': '#FF8C00',
-    'Joint Pain': '#FF1493',
-    'Vomiting': '#FF69B4',
-    'Rash': '#FFB6C1',
-    'Diarrhea': '#FF6347',
-    'Hypotension': '#FF4500',
-    # Add more diseases here
+    'Sudden Fever': '#FF4500',        # OrangeRed
+    'Headache': '#FF6347',            # Tomato
+    'Mouth Bleed': '#FFD700',         # Gold
+    'Nose Bleed': '#DAA520',          # GoldenRod
+    'Muscle Pain': '#FF8C00',         # DarkOrange
+    'Joint Pain': '#FF1493',          # DeepPink
+    'Vomiting': '#FF69B4',            # HotPink
+    'Rash': '#FFB6C1',                # LightPink
+    'Diarrhea': '#FF6347',            # Tomato (Same as Headache for consistency)
+    'Hypotension': '#FF4500',         # OrangeRed (Same as Sudden Fever for consistency)
+    'Pleural Effusion': '#FF8C00',    # DarkOrange (Same as Muscle Pain for consistency)
+    'Ascites': '#FFD700',             # Gold (Same as Mouth Bleed for consistency)
+    'Gastro Bleeding': '#DAA520',     # GoldenRod (Same as Nose Bleed for consistency)
+    'Swelling': '#FF69B4',            # HotPink (Same as Vomiting for consistency)
+    'Nausea': '#FFB6C1',              # LightPink (Same as Rash for consistency)
+    'Chills': '#FF6347',              # Tomato (Same as Headache for consistency)
+    'Myalgia': '#FF8C00',             # DarkOrange (Same as Muscle Pain for consistency)
+    'Digestion Trouble': '#FF1493',   # DeepPink (Same as Joint Pain for consistency)
+    'Fatigue': '#FF69B4',             # HotPink (Same as Vomiting for consistency)
+    'Skin Lesions': '#FFB6C1',        # LightPink (Same as Rash for consistency)
+    'Stomach Pain': '#FF6347',        # Tomato (Same as Headache for consistency)
+    'Orbital Pain': '#FF4500',        # OrangeRed (Same as Sudden Fever for consistency)
+    'Neck Pain': '#FF8C00',           # DarkOrange (Same as Muscle Pain for consistency)
+    'Weakness': '#FFD700',            # Gold (Same as Mouth Bleed for consistency)
+    'Back Pain': '#DAA520',           # GoldenRod (Same as Nose Bleed for consistency)
+    'Weight Loss': '#FF69B4',         # HotPink (Same as Vomiting for consistency)
+    'Gum Bleed': '#FFB6C1',           # LightPink (Same as Rash for consistency)
+    'Jaundice': '#FF6347',            # Tomato (Same as Headache for consistency)
+    'Coma': '#FF4500',                # OrangeRed (Same as Sudden Fever for consistency)
+    'Dizziness': '#FF8C00',           # DarkOrange (Same as Muscle Pain for consistency)
+    'Inflammation': '#FFD700',        # Gold (Same as Mouth Bleed for consistency)
+    'Red Eyes': '#DAA520',            # GoldenRod (Same as Nose Bleed for consistency)
+    'Loss of Appetite': '#FF69B4',    # HotPink (Same as Vomiting for consistency)
+    'Urination Loss': '#FFB6C1',      # LightPink (Same as Rash for consistency)
+    'Slow Heart Rate': '#FF6347',     # Tomato (Same as Headache for consistency)
+    'Abdominal Pain': '#FF4500',      # OrangeRed (Same as Sudden Fever for consistency)
+    'Light Sensitivity': '#FF8C00',   # DarkOrange (Same as Muscle Pain for consistency)
+    'Yellow Skin': '#FFD700',         # Gold (Same as Mouth Bleed for consistency)
+    'Yellow Eyes': '#DAA520',         # GoldenRod (Same as Nose Bleed for consistency)
+    'Facial Distortion': '#FF69B4',   # HotPink (Same as Vomiting for consistency)
+    'Microcephaly': '#FFB6C1',        # LightPink (Same as Rash for consistency)
+    'Rigor': '#FF6347',               # Tomato (Same as Headache for consistency)
+    'Bitter Tongue': '#FF4500',       # OrangeRed (Same as Sudden Fever for consistency)
+    'Convulsion': '#FF8C00',          # DarkOrange (Same as Muscle Pain for consistency)
+    'Anemia': '#FFD700',              # Gold (Same as Mouth Bleed for consistency)
+    'Cocacola Urine': '#DAA520',      # GoldenRod (Same as Nose Bleed for consistency)
+    'Hypoglycemia': '#FF69B4',        # HotPink (Same as Vomiting for consistency)
+    'Prostraction': '#FFB6C1',        # LightPink (Same as Rash for consistency)
+    'Hyperpyrexia': '#FF6347',        # Tomato (Same as Headache for consistency)
+    'Stiff Neck': '#FF4500',          # OrangeRed (Same as Sudden Fever for consistency)
+    'Irritability': '#FF8C00',        # DarkOrange (Same as Muscle Pain for consistency)
+    'Confusion': '#FFD700',           # Gold (Same as Mouth Bleed for consistency)
+    'Tremor': '#DAA520',              # GoldenRod (Same as Nose Bleed for consistency)
+    'Paralysis': '#FF69B4',           # HotPink (Same as Vomiting for consistency)
+    'Lymph Swells': '#FFB6C1',        # LightPink (Same as Rash for consistency)
+    'Breathing Restriction': '#FF6347', # Tomato (Same as Headache for consistency)
+    'Toe Inflammation': '#FF4500',    # OrangeRed (Same as Sudden Fever for consistency)
+    'Finger Inflammation': '#FF8C00', # DarkOrange (Same as Muscle Pain for consistency)
+    'Lips Irritation': '#FFD700',     # Gold (Same as Mouth Bleed for consistency)
+    'Itchiness': '#DAA520',           # GoldenRod (Same as Nose Bleed for consistency)
+    'Ulcers': '#FF69B4',              # HotPink (Same as Vomiting for consistency)
+    'Toenail Loss': '#FFB6C1',        # LightPink (Same as Rash for consistency)
+    'Speech Problem': '#FF6347',      # Tomato (Same as Headache for consistency)
+    'Bullseye Rash': '#FF4500'        # OrangeRed (Same as Sudden Fever for consistency)
 }
+
 
 disease_severity = {
     'Sudden Fever': 'High',
@@ -43,7 +97,60 @@ disease_severity = {
     'Rash': 'Low',
     'Diarrhea': 'Moderate',
     'Hypotension': 'High',
-    # Add more severity levels here
+    'Pleural Effusion': 'Severe',
+    'Ascites': 'Severe',
+    'Gastro Bleeding': 'Severe',
+    'Swelling': 'Moderate',
+    'Nausea': 'Medium',
+    'Chills': 'Low',
+    'Myalgia': 'Medium',
+    'Digestion Trouble': 'Moderate',
+    'Fatigue': 'Medium',
+    'Skin Lesions': 'Moderate',
+    'Stomach Pain': 'Moderate',
+    'Orbital Pain': 'Medium',
+    'Neck Pain': 'Low',
+    'Weakness': 'High',
+    'Back Pain': 'Low',
+    'Weight Loss': 'Moderate',
+    'Gum Bleed': 'Severe',
+    'Jaundice': 'Severe',
+    'Coma': 'Critical',
+    'Dizziness': 'Medium',
+    'Inflammation': 'Moderate',
+    'Red Eyes': 'Medium',
+    'Loss of Appetite': 'Medium',
+    'Urination Loss': 'Severe',
+    'Slow Heart Rate': 'High',
+    'Abdominal Pain': 'Moderate',
+    'Light Sensitivity': 'Low',
+    'Yellow Skin': 'Severe',
+    'Yellow Eyes': 'Severe',
+    'Facial Distortion': 'Severe',
+    'Microcephaly': 'Critical',
+    'Rigor': 'High',
+    'Bitter Tongue': 'Medium',
+    'Convulsion': 'Critical',
+    'Anemia': 'Moderate',
+    'Cocacola Urine': 'Severe',
+    'Hypoglycemia': 'High',
+    'Prostraction': 'Critical',
+    'Hyperpyrexia': 'Critical',
+    'Stiff Neck': 'High',
+    'Irritability': 'Medium',
+    'Confusion': 'Severe',
+    'Tremor': 'Medium',
+    'Paralysis': 'Critical',
+    'Lymph Swells': 'Moderate',
+    'Breathing Restriction': 'Severe',
+    'Toe Inflammation': 'Low',
+    'Finger Inflammation': 'Low',
+    'Lips Irritation': 'Low',
+    'Itchiness': 'Low',
+    'Ulcers': 'Moderate',
+    'Toenail Loss': 'Low',
+    'Speech Problem': 'Severe',
+    'Bullseye Rash': 'Moderate'
 }
 
 # Title of the web app with styling
