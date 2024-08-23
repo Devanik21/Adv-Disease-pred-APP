@@ -9,11 +9,28 @@ df = pd.read_csv("disease.csv")  # Update with the correct path if needed
 # Load the trained model (adjust the path to where your model is saved)
 model = joblib.load("RF_Disease_pred.pkl")  # Replace with your actual model path
 
-st.sidebar.header("Model Performance Metrics")
-st.sidebar.write(f"Accuracy: {metrics['accuracy']:.2f}")
-st.sidebar.write(f"Precision: {metrics['precision']:.2f}")
-st.sidebar.write(f"Recall: {metrics['recall']:.2f}")
-st.sidebar.write(f"F1 Score: {metrics['f1']:.2f}")
+import matplotlib.pyplot as plt
+
+# Disease frequency
+st.subheader('Disease Frequency')
+
+disease_counts = df['prognosis'].value_counts()
+fig, ax = plt.subplots()
+disease_counts.plot(kind='bar', color=[disease_colors[disease] for disease in disease_counts.index], ax=ax)
+ax.set_xlabel('Disease')
+ax.set_ylabel('Count')
+ax.set_title('Frequency of Diseases')
+st.pyplot(fig)
+
+# Severity distribution
+st.subheader('Severity Distribution')
+
+severity_counts = pd.Series(disease_severity).value_counts()
+fig, ax = plt.subplots()
+severity_counts.plot(kind='pie', autopct='%1.1f%%', colors=[severity_colors[severity] for severity in severity_counts.index], ax=ax)
+ax.set_title('Distribution of Disease Severity')
+st.pyplot(fig)
+
 # Set page configuration
 st.set_page_config(
     page_title="Disease Prediction APP",
