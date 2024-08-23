@@ -167,7 +167,7 @@ st.markdown("""
         color: #FF4500;
         text-align: center;
         margin-bottom: 20px;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
     }
     .subheader {
         color: #4682B4;
