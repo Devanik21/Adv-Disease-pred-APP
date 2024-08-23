@@ -17,6 +17,7 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
+# Define colors and severity mappings
 severity_colors = {
     'Low': '#90EE90',        # Light Green
     'Medium': '#FFFF00',     # Yellow
@@ -25,7 +26,7 @@ severity_colors = {
     'Severe': '#FF4500',     # Orange Red
     'Critical': '#FF0000'    # Red
 }
-# Define color and severity mappings
+
 disease_colors = {
     'Sudden Fever': '#FF4500',
     'Headache': '#FF6347',
@@ -92,10 +93,8 @@ disease_colors = {
     'Speech Problem': '#FF69B4',
     'Bullseye Rash': '#DAA520',
     'Dengue': '#FF69B4',
-     'Chikungunya': '#DAA520'
+    'Chikungunya': '#DAA520'
 }
-
-
 
 disease_severity = {
     'Sudden Fever': 'High',
@@ -163,16 +162,14 @@ disease_severity = {
     'Speech Problem': 'Severe',
     'Bullseye Rash': 'Moderate',
     'Dengue': 'Severe',
-     'Chikungunya':'Rare'
-     
+    'Chikungunya':'Rare'
 }
-
 
 # Title of the web app with styling
 st.markdown("""
     <style>
     .title {
-        font-size: 32px;
+        font-size: 36px;
         font-weight: bold;
         color: #FF6347;
         text-align: center;
@@ -180,15 +177,16 @@ st.markdown("""
     }
     .subheader {
         color: #4682B4;
-        font-size: 24px;
+        font-size: 26px;
     }
     .result {
-        font-size: 20px;
+        font-size: 24px;
         font-weight: bold;
     }
     .note {
-        font-size: 16px;
+        font-size: 18px;
         color: #808080;
+        text-align: center;
     }
     .sidebar {
         background-color: #f0f8ff;
@@ -201,10 +199,10 @@ st.markdown("""
     """, unsafe_allow_html=True)
 
 # Title of the web app
-st.markdown('<div class="title">Disease Prediction Web App</div>', unsafe_allow_html=True)
+st.markdown('<div class="title">🧬 Disease Prediction Web App </div>', unsafe_allow_html=True)
 
 # Sidebar for user input
-st.sidebar.header("Input Features")
+st.sidebar.header("🔍 Input Features")
 
 def user_input_features():
     # Create a dictionary to hold feature inputs
@@ -222,16 +220,16 @@ def user_input_features():
 input_df = user_input_features()
 
 # Display user input
-st.subheader('User Input Features')
+st.subheader('📊 User Input Features')
 st.write(input_df)
 
 # Show loading spinner
-with st.spinner('Making prediction...'):
+with st.spinner('🔍 Making prediction...'):
     # Make prediction
     prediction = model.predict(input_df)
 
 # Display the prediction result
-st.subheader('Prediction Result')
+st.subheader('🎯 Prediction Result')
 
 # Display prediction with dynamic color and severity
 def get_color_and_severity(disease):
@@ -243,12 +241,12 @@ disease = prediction[0]
 color, severity = get_color_and_severity(disease)
 
 st.markdown(f'<div class="result" style="color:{color};">🩺 The predicted disease based on the input features is: <strong>{disease}</strong></div>', unsafe_allow_html=True)
-st.markdown(f'<div class="result" style="color:{color};">Severity: <strong>{severity}</strong></div>', unsafe_allow_html=True)
+st.markdown(f'<div class="result" style="color:{severity_colors.get(severity, "#000000")};">Severity: <strong>{severity}</strong></div>', unsafe_allow_html=True)
 
 # Optionally, you can add more details or a description below the result
 st.markdown("""
     <div class="note">
-        <strong>Note:</strong> The prediction is based on the model's analysis of the provided symptoms. For accurate diagnosis, please consult a healthcare professional.
+        <strong>Note:</strong> The prediction is based on the model's analysis of the provided symptoms. For accurate diagnosis, please consult a healthcare professional. 🩺
     </div>
     """, unsafe_allow_html=True)
 
