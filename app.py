@@ -9,13 +9,43 @@ df = pd.read_csv("disease.csv")  # Update with the correct path if needed
 # Load the trained model (adjust the path to where your model is saved)
 model = joblib.load("RF_Disease_pred.pkl")  # Replace with your actual model path
 
-
+# Set page configuration
 st.set_page_config(
     page_title="Disease Prediction APP",
     page_icon="🧬",
     layout="wide",
     initial_sidebar_state="expanded",
 )
+
+# Define color and severity mappings
+disease_colors = {
+    'Sudden Fever': '#FF4500',
+    'Headache': '#FF6347',
+    'Mouth Bleed': '#FFD700',
+    'Nose Bleed': '#DAA520',
+    'Muscle Pain': '#FF8C00',
+    'Joint Pain': '#FF1493',
+    'Vomiting': '#FF69B4',
+    'Rash': '#FFB6C1',
+    'Diarrhea': '#FF6347',
+    'Hypotension': '#FF4500',
+    # Add more diseases here
+}
+
+disease_severity = {
+    'Sudden Fever': 'High',
+    'Headache': 'Medium',
+    'Mouth Bleed': 'Severe',
+    'Nose Bleed': 'Moderate',
+    'Muscle Pain': 'Low',
+    'Joint Pain': 'Medium',
+    'Vomiting': 'High',
+    'Rash': 'Low',
+    'Diarrhea': 'Moderate',
+    'Hypotension': 'High',
+    # Add more severity levels here
+}
+
 # Title of the web app with styling
 st.markdown("""
     <style>
@@ -32,7 +62,6 @@ st.markdown("""
     }
     .result {
         font-size: 20px;
-        color: #2E8B57;
         font-weight: bold;
     }
     .note {
@@ -40,8 +69,12 @@ st.markdown("""
         color: #808080;
     }
     .sidebar {
-        background-color: #00000;
+        background-color: #f0f8ff;
     }
+    .disease-high { color: #FF6347; }
+    .disease-medium { color: #FFD700; }
+    .disease-low { color: #32CD32; }
+    .disease-severe { color: #FF4500; }
     </style>
     """, unsafe_allow_html=True)
 
@@ -78,8 +111,17 @@ with st.spinner('Making prediction...'):
 # Display the prediction result
 st.subheader('Prediction Result')
 
-# Customize the prediction message
-st.markdown(f'<div class="result">🩺 The predicted disease based on the input features is:  {prediction[0]}</div>', unsafe_allow_html=True)
+# Display prediction with dynamic color and severity
+def get_color_and_severity(disease):
+    color = disease_colors.get(disease, '#000000')  # Default to black if not found
+    severity = disease_severity.get(disease, 'Unknown')
+    return color, severity
+
+disease = prediction[0]
+color, severity = get_color_and_severity(disease)
+
+st.markdown(f'<div class="result" style="color:{color};">🩺 The predicted disease based on the input features is: <strong>{disease}</strong></div>', unsafe_allow_html=True)
+st.markdown(f'<div class="result" style="color:{color};">Severity: <strong>{severity}</strong></div>', unsafe_allow_html=True)
 
 # Optionally, you can add more details or a description below the result
 st.markdown("""
@@ -90,4 +132,3 @@ st.markdown("""
 
 # Add an image or additional content
 st.image("DNA.jpg", caption="Health and Wellness", use_column_width=True)
-
