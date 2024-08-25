@@ -97,7 +97,8 @@ disease_severity = {
     'Speech Problem': 'Severe',
     'Bullseye Rash': 'Moderate',
     'Dengue': 'Severe',
-    'Chikungunya':'Critical'
+    'Chikungunya':'Critical',
+    'Tungiasis' : 'Moderate'
 }
 disease_colors = {
     'Sudden Fever': '#FF4500',
@@ -165,7 +166,8 @@ disease_colors = {
     'Speech Problem': '#FF69B4',
     'Bullseye Rash': '#DAA520',
     'Dengue': '#FF69B4',
-    'Chikungunya': '#DAA520'
+    'Chikungunya': '#DAA520',
+    'Tungiasis' : 'FF69B4' 
 }
 # Define colors and severity mappings
 
