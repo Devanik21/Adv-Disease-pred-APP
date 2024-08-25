@@ -205,6 +205,7 @@ color, severity = get_color_and_severity(disease)
 st.markdown(f'<h2 style="color:{color};">🩺 The predicted disease based on the input features is: <strong>{disease}</strong></h2>', unsafe_allow_html=True)
 st.markdown(f'<h3 style="color:{severity_colors.get(severity, "#000000")};">Severity: <strong>{severity}</strong></h3>', unsafe_allow_html=True)
 
+st.subheader('🛩️Advanced Visualizations')
 # Add a pie chart for severity distribution
 severity_counts = {k: list(disease_severity.values()).count(k) for k in set(disease_severity.values())}
 fig, ax = plt.subplots()
