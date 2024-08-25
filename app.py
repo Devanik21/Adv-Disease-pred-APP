@@ -247,13 +247,37 @@ ax.set_title('Histogram of Symptom Frequencies')
 ax.set_xlabel('Frequency')
 st.pyplot(fig)
 
-# Correlation Heatmap for Numeric Columns
+import numpy as np
+import seaborn as sns
+import matplotlib.pyplot as plt
+import streamlit as st
+
+# Assuming df is your DataFrame
 numeric_df = df.select_dtypes(include=[np.number])  # Select only numeric columns
-fig, ax = plt.subplots()
+
+# Increase figure size
+fig, ax = plt.subplots(figsize=(14, 10))  # Adjust the size as needed
+
+# Calculate correlation matrix
 corr_matrix = numeric_df.corr()
-sns.heatmap(corr_matrix, annot=True, cmap='coolwarm', ax=ax)
-ax.set_title('Correlation Heatmap of Numeric Features')
+
+# Create a heatmap with improved aesthetics
+sns.heatmap(
+    corr_matrix,
+    annot=True,
+    cmap='coolwarm',
+    ax=ax,
+    fmt='.2f',  # Format for annotations
+    annot_kws={"size": 10},  # Font size for annotations
+    cbar_kws={"shrink": .8}  # Adjust colorbar size
+)
+
+# Set title
+ax.set_title('Correlation Heatmap of Numeric Features', fontsize=16)
+
+# Display the plot in Streamlit
 st.pyplot(fig)
+
 
 # Line Chart of Feature Values (if applicable)
 fig, ax = plt.subplots()
