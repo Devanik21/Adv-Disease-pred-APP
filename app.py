@@ -296,7 +296,7 @@ ax.set_title('Distribution of Diseases in Dataset')
 st.pyplot(fig)
 
 # Plot 3: Box Plot
-sns.boxplot(data=df, x='target', y='numeric_feature', ax=axs[1, 0], palette='viridis')
+sns.boxplot(data=df, x='prognosis', y='headache', ax=axs[1, 0], palette='viridis')
 axs[1, 0].set_title('Box Plot of Numeric Feature by Target', fontsize=16)
 
 
