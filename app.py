@@ -275,11 +275,7 @@ axs[0, 1].set_title('Violin Plot of Numeric Feature by Target', fontsize=16)
 sns.boxplot(data=df, x='target', y='numeric_feature', ax=axs[1, 0], palette='viridis')
 axs[1, 0].set_title('Box Plot of Numeric Feature by Target', fontsize=16)
 
-# Plot 4: Pair Plot
-sns.pairplot(numeric_df, diag_kind='kde', plot_kws={'alpha': 0.7}, corner=True)
-# Need to use plt.subplots() as pairplot does not fit into axs
-plt.tight_layout()
-plt.show()  # Display pairplot separately
+
 
 # Display all plots in Streamlit
 st.pyplot(fig)
