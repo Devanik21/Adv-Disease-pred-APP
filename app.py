@@ -29,6 +29,8 @@ st.set_page_config(
 
 # Title of the web app
 st.markdown('<h1 style="color:#FF6347; text-align:center;">🧬 Disease Prediction Web App </h1>', unsafe_allow_html=True)
+# Add an image or additional content
+st.image("DNA.jpg", caption="Health and Wellness", use_column_width=True)
 
 # Sidebar for user input
 st.sidebar.header("🔍 Input Features")
@@ -185,8 +187,6 @@ input_df = user_input_features()
 # Display user input
 st.subheader('📊 User Input Features')
 st.write(input_df)
-# Add an image or additional content
-st.image("DNA.jpg", caption="Health and Wellness", use_column_width=True)
 
 # Show loading spinner
 with st.spinner('🔍 Making prediction...'):
