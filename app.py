@@ -2,12 +2,16 @@ import streamlit as st
 import pandas as pd
 import joblib
 import numpy as np
+from visualization import plot_feature_importance, correlation_matrix
+from model_interpretation import explain_model_prediction
+from about import display_about
+from data_preprocessing import preprocess_data
 
 # Load the dataset
-df = pd.read_csv("disease.csv")  # Update with the correct path if needed
+df = pd.read_csv("disease.csv")
 
-# Load the trained model (adjust the path to where your model is saved)
-model = joblib.load("RF_Disease_pred.pkl")  # Replace with your actual model path
+# Load the pre-trained model (Random Forest)
+model = joblib.load("RF_Disease_pred.pkl")
 
 # Set page configuration
 st.set_page_config(
@@ -93,7 +97,7 @@ disease_colors = {
     'Speech Problem': '#FF69B4',
     'Bullseye Rash': '#DAA520',
     'Dengue': '#FF69B4',
-    'Chikungunya': '#DAA520'
+    'Chikungunya':'Critical'
 }
 
 disease_severity = {
@@ -165,90 +169,52 @@ disease_severity = {
     'Chikungunya':'Critical'
 }
 
-# Title of the web app with styling
-st.markdown("""
-    <style>
-    .title {
-        font-size: 36px;
-        font-weight: bold;
-        color: #FF6347;
-        text-align: center;
-        margin-bottom: 20px;
-    }
-    .subheader {
-        color: #4682B4;
-        font-size: 26px;
-    }
-    .result {
-        font-size: 24px;
-        font-weight: bold;
-    }
-    .note {
-        font-size: 18px;
-        color: #808080;
-        text-align: center;
-    }
-    .sidebar {
-        background-color: #f0f8ff;
-    }
-    .disease-high { color: #FF6347; }
-    .disease-medium { color: #FFD700; }
-    .disease-low { color: #32CD32; }
-    .disease-severe { color: #FF4500; }
-    </style>
-    """, unsafe_allow_html=True)
-
-# Title of the web app
-st.markdown('<div class="title">🧬 Disease Prediction Web App </div>', unsafe_allow_html=True)
-
-# Sidebar for user input
-st.sidebar.header("🔍 Input Features")
-
-def user_input_features():
-    # Create a dictionary to hold feature inputs
-    features = {}
-    
-    # Assuming the last column is 'prognosis' and the rest are features
-    for col in df.columns[:-1]:  # Exclude the target column
-        # All features are binary (0 or 1), so use a slider with values 0 and 1
-        features[col] = st.sidebar.slider(f"{col}", 0, 1, 0)
-
-    input_df = pd.DataFrame(features, index=[0])
-    return input_df
-
-# Get user input
-input_df = user_input_features()
-
-# Display user input
-st.subheader('📊 User Input Features')
-st.write(input_df)
-
-# Show loading spinner
-with st.spinner('🔍 Making prediction...'):
-    # Make prediction
-    prediction = model.predict(input_df)
-
-# Display the prediction result
-st.subheader('🎯 Prediction Result')
-
-# Display prediction with dynamic color and severity
 def get_color_and_severity(disease):
     color = disease_colors.get(disease, '#000000')  # Default to black if not found
     severity = disease_severity.get(disease, 'Unknown')
     return color, severity
 
+# Sidebar for user input
+st.sidebar.header("🔍 Input Features")
+
+def user_input_features():
+    features = {}
+    for col in df.columns[:-1]:  # Exclude the target column
+        features[col] = st.sidebar.slider(f"{col}", 0, 1, 0)
+    input_df = pd.DataFrame(features, index=[0])
+    return input_df
+
+# Get user input
+input_df = preprocess_data(user_input_features())
+
+# Display user input
+st.subheader('📊 User Input Features')
+st.write(input_df)
+
+# Show loading spinner and make prediction
+with st.spinner('🔍 Making prediction...'):
+    prediction = model.predict(input_df)
+
+# Display the prediction result
 disease = prediction[0]
 color, severity = get_color_and_severity(disease)
-
 st.markdown(f'<div class="result" style="color:{color};">🩺 The predicted disease based on the input features is: <strong>{disease}</strong></div>', unsafe_allow_html=True)
 st.markdown(f'<div class="result" style="color:{severity_colors.get(severity, "#000000")};">Severity: <strong>{severity}</strong></div>', unsafe_allow_html=True)
 
-# Optionally, you can add more details or a description below the result
-st.markdown("""
-    <div class="note">
-        <strong>Note:</strong> The prediction is based on the model's analysis of the provided symptoms. For accurate diagnosis, please consult a healthcare professional. 
-    </div>
-    """, unsafe_allow_html=True)
+# Visualization options
+if st.sidebar.checkbox("Show Feature Importance"):
+    plot_feature_importance(model, df.columns[:-1])
+
+if st.sidebar.checkbox("Show Correlation Matrix"):
+    correlation_matrix(df)
+
+# Model Interpretation option
+if st.sidebar.checkbox("Explain Prediction"):
+    explain_model_prediction(model, input_df)
+
+# About section
+if st.sidebar.checkbox("About this App"):
+    display_about()
 
 # Add an image or additional content
 st.image("DNA.jpg", caption="Health and Wellness", use_column_width=True)
