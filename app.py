@@ -3,7 +3,7 @@ import pandas as pd
 import joblib
 import numpy as np
 from visualization import plot_feature_importance, correlation_matrix
-from model_interpretation import explain_model_prediction
+
 from model_selection import load_model
 from about import display_about
 from data_preprocessing import preprocess_data
@@ -12,8 +12,6 @@ from data_preprocessing import preprocess_data
 df = pd.read_csv("disease.csv")
 
 # Sidebar for model selection
-model_name = st.sidebar.selectbox("Choose a model", ["Random Forest", "Logistic Regression", "SVM"])
-model = load_model(model_name)
 
 # Preprocess user input data
 input_df = preprocess_data(user_input_features())
