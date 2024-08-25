@@ -8,8 +8,6 @@ import matplotlib.pyplot as plt
 df = pd.read_csv("disease.csv")  # Update with the correct path if needed
 
 
-# Add an image or additional content
-st.image("bio.jpg", caption="Health and Wellness", use_column_width=True)
 
 # Load the trained model (adjust the path to where your model is saved)
 model = joblib.load("RF_Disease_pred.pkl")  # Replace with your actual model path
