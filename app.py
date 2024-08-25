@@ -9,7 +9,14 @@ df = pd.read_csv("disease.csv")  # Update with the correct path if needed
 
 # Load the trained model (adjust the path to where your model is saved)
 model = joblib.load("RF_Disease_pred.pkl")  # Replace with your actual model path
-
+severity_colors = {
+    'Low': '#90EE90',        # Light Green
+    'Medium': '#FFFF00',     # Yellow
+    'High': '#FF6347',       # Tomato
+    'Moderate': '#FFA07A',   # Light Salmon
+    'Severe': '#FF4500',     # Orange Red
+    'Critical': '#FF0000'    # Red
+}
 # Set page configuration
 st.set_page_config(
     page_title="Disease Prediction APP",
@@ -161,14 +168,7 @@ disease_colors = {
     'Chikungunya': '#DAA520'
 }
 # Define colors and severity mappings
-severity_colors = {
-    'Low': '#90EE90',        # Light Green
-    'Medium': '#FFFF00',     # Yellow
-    'High': '#FF6347',       # Tomato
-    'Moderate': '#FFA07A',   # Light Salmon
-    'Severe': '#FF4500',     # Orange Red
-    'Critical': '#FF0000'    # Red
-}
+
 def user_input_features():
     features = {}
     for col in df.columns[:-1]:  # Exclude the target column
