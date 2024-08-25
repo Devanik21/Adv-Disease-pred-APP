@@ -216,14 +216,29 @@ ax.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
 st.pyplot(fig)
 
 
-# Bar Chart of Symptom Frequencies
+import matplotlib.pyplot as plt
+import streamlit as st
+
+# Assuming df is your DataFrame and symptom_counts is already calculated
 symptom_counts = df.iloc[:, :-1].sum()
-fig, ax = plt.subplots()
+
+# Increase figure size for better label visibility
+fig, ax = plt.subplots(figsize=(12, 6))  # Adjust the size as needed
+
+# Plot bar chart
 symptom_counts.plot(kind='bar', ax=ax, color='skyblue')
+
+# Rotate x-axis labels
+ax.set_xticklabels(ax.get_xticklabels(), rotation=45, ha='right')
+
+# Set titles and labels
 ax.set_title('Frequency of Symptoms in Dataset')
 ax.set_xlabel('Symptom')
 ax.set_ylabel('Frequency')
+
+# Display the plot in Streamlit
 st.pyplot(fig)
+
 
 # Histogram of Symptoms
 fig, ax = plt.subplots()
