@@ -249,24 +249,36 @@ st.pyplot(fig)
 # Assuming df is your DataFrame
 numeric_df = df.select_dtypes(include=[np.number])  # Select only numeric columns
 
-# Create a figure with subplots
-fig, axs = plt.subplots(2, 2, figsize=(18, 16))  # Adjust size as needed
+# Increase figure size
+fig, ax = plt.subplots(figsize=(16, 14))  # Adjust size as needed
 
-# Plot 1: Correlation Heatmap
+# Calculate correlation matrix
 corr_matrix = numeric_df.corr()
+
+# Mask the upper triangle of the heatmap
 mask = np.triu(np.ones_like(corr_matrix, dtype=bool))
+
+# Create a heatmap with improved aesthetics
 sns.heatmap(
     corr_matrix,
+    # Apply mask to upper triangle
     annot=True,
     cmap='coolwarm',
-    ax=axs[0, 0],
-    fmt='.2f',
-    annot_kws={"size": 8},
-    cbar_kws={"shrink": .8}
+    ax=ax,
+    fmt='.2f',  # Format for annotations
+    annot_kws={"size": 8},  # Smaller font size for annotations
+    cbar_kws={"shrink": .8}  # Adjust colorbar size
 )
-axs[0, 0].set_title('Correlation Heatmap of Numeric Features', fontsize=16)
 
+# Set x-axis and y-axis labels
+ax.set_xticklabels(ax.get_xticklabels(), rotation=45, ha='right', fontsize=10)
+ax.set_yticklabels(ax.get_yticklabels(), rotation=0, fontsize=10)
 
+# Set title
+ax.set_title('Correlation Heatmap of Numeric Features', fontsize=18)
+
+# Display the plot in Streamlit
+st.pyplot(fig)
 
 
 # Assuming df is your DataFrame and you're plotting the mean of feature values
