@@ -253,14 +253,27 @@ selected_features = st.sidebar.multiselect("Select features for importance visua
 
 if selected_features and st.sidebar.checkbox("Show Feature Importance"):
     feature_importance = model.feature_importances_
-    selected_indices = [df.columns.get_loc(col) for col in selected_features]
-    sorted_idx = np.argsort(feature_importance[selected_indices])
     
+    # Get indices of the selected features
+    selected_indices = [df.columns.get_loc(col) for col in selected_features]
+    
+    # Extract the importance of the selected features
+    selected_importances = feature_importance[selected_indices]
+    
+    # Sort the features by importance
+    sorted_idx = np.argsort(selected_importances)
+    
+    # Convert selected features to a numpy array and apply sorting
+    sorted_features = np.array(selected_features)[sorted_idx]
+    sorted_importances = selected_importances[sorted_idx]
+    
+    # Plot the feature importance
     plt.figure(figsize=(10, 8))
-    plt.barh(np.array(selected_features)[sorted_idx], feature_importance[selected_indices][sorted_idx], color="skyblue")
+    plt.barh(sorted_features, sorted_importances, color="skyblue")
     plt.xlabel("Importance")
     plt.title("Feature Importance")
     st.pyplot(plt)
+
 
 # Visualization: Correlation Matrix
 st.subheader("📊 Correlation Matrix")
