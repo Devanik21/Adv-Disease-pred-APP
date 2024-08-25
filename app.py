@@ -24,6 +24,8 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded",
 )
+# Add an image or additional content
+st.image("DNA.jpg", caption="Health and Wellness", use_column_width=True)
 
 # Title of the web app
 st.markdown('<h1 style="color:#FF6347; text-align:center;">🧬 Disease Prediction Web App </h1>', unsafe_allow_html=True)
@@ -210,8 +212,6 @@ st.markdown(f'<h2 style="color:{color};">🩺 The predicted disease based on the
 st.markdown(f'<h3 style="color:{severity_colors.get(severity, "#000000")};">Severity: <strong>{severity}</strong></h3>', unsafe_allow_html=True)
 
 
-# Add an image or additional content
-st.image("DNA.jpg", caption="Health and Wellness", use_column_width=True)
 
 # User feedback
 st.subheader("📝 Feedback")
