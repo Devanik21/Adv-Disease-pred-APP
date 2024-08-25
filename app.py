@@ -125,16 +125,3 @@ ax.pie(disease_distribution, labels=disease_distribution.index, autopct='%1.1f%%
 ax.axis('equal')
 ax.set_title('Distribution of Diseases in Dataset')
 st.pyplot(fig)
-
-# User feedback
-st.subheader("📝 Feedback")
-feedback = st.text_area("Share your feedback or suggestions:", height=150)
-if st.button('Submit Feedback'):
-    st.success("Thank you for your feedback!")
-
-# Additional notes
-st.markdown("""
-    <h4 style="text-align:center; color:#808080;">
-        <strong>Note:</strong> The prediction is based on the model's analysis of the provided symptoms. For accurate diagnosis, please consult a healthcare professional. 
-    </h4>
-    """, unsafe_allow_html=True)
