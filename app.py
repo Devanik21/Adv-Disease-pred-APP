@@ -21,12 +21,12 @@ st.set_page_config(
 
 # Define colors and severity mappings
 severity_colors = {
-    'Low': '#90EE90',        # Light Green
-    'Medium': '#FFFF00',     # Yellow
-    'High': '#FF6347',       # Tomato
-    'Moderate': '#FFA07A',   # Light Salmon
-    'Severe': '#FF4500',     # Orange Red
-    'Critical': '#FF0000'    # Red
+    'Low': '#90EE90',
+    'Medium': '#FFFF00',
+    'High': '#FF6347',
+    'Moderate': '#FFA07A',
+    'Severe': '#FF4500',
+    'Critical': '#FF0000'
 }
 
 disease_colors = {
@@ -97,6 +97,7 @@ disease_colors = {
     'Dengue': '#FF69B4',
     'Chikungunya': '#DAA520'
 }
+
 
 disease_severity = {
     'Sudden Fever': 'High',
@@ -227,9 +228,8 @@ with st.spinner('🔍 Making prediction...'):
 # Display the prediction result
 st.subheader('🎯 Prediction Result')
 
-# Display prediction with dynamic color and severity
 def get_color_and_severity(disease):
-    color = disease_colors.get(disease, '#000000')  # Default to black if not found
+    color = disease_colors.get(disease, '#000000')
     severity = disease_severity.get(disease, 'Unknown')
     return color, severity
 
@@ -245,24 +245,30 @@ st.markdown("""
     </div>
     """, unsafe_allow_html=True)
 
-# Add an image or additional content
 st.image("DNA.jpg", caption="Health and Wellness", use_column_width=True)
 
 # Visualization: Feature Importance
 st.subheader("📊 Feature Importance")
-if st.sidebar.checkbox("Show Feature Importance"):
+selected_features = st.sidebar.multiselect("Select features for importance visualization", df.columns[:-1], default=df.columns[:-1])
+
+if selected_features and st.sidebar.checkbox("Show Feature Importance"):
     feature_importance = model.feature_importances_
-    sorted_idx = np.argsort(feature_importance)
+    selected_indices = [df.columns.get_loc(col) for col in selected_features]
+    sorted_idx = np.argsort(feature_importance[selected_indices])
+    
     plt.figure(figsize=(10, 8))
-    plt.barh(df.columns[:-1][sorted_idx], feature_importance[sorted_idx], color="skyblue")
+    plt.barh(np.array(selected_features)[sorted_idx], feature_importance[selected_indices][sorted_idx], color="skyblue")
     plt.xlabel("Importance")
     plt.title("Feature Importance")
     st.pyplot(plt)
 
 # Visualization: Correlation Matrix
 st.subheader("📊 Correlation Matrix")
-if st.sidebar.checkbox("Show Correlation Matrix"):
-    corr = df.corr()
+selected_corr_features = st.sidebar.multiselect("Select features for correlation matrix", df.columns[:-1], default=df.columns[:-1])
+
+if selected_corr_features and st.sidebar.checkbox("Show Correlation Matrix"):
+    corr = df[selected_corr_features].corr()
+    
     plt.figure(figsize=(12, 10))
     sns.heatmap(corr, annot=True, cmap="coolwarm", fmt=".2f", square=True)
     plt.title("Feature Correlation Matrix")
