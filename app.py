@@ -266,19 +266,6 @@ sns.heatmap(
 )
 axs[0, 0].set_title('Correlation Heatmap of Numeric Features', fontsize=16)
 
-# Plot 2: Violin Plot
-# Assuming 'target' is a categorical column or adjust accordingly
-sns.violinplot(data=df, x='target', y='numeric_feature', ax=axs[0, 1], palette='viridis')
-axs[0, 1].set_title('Violin Plot of Numeric Feature by Target', fontsize=16)
-
-# Plot 3: Box Plot
-sns.boxplot(data=df, x='target', y='numeric_feature', ax=axs[1, 0], palette='viridis')
-axs[1, 0].set_title('Box Plot of Numeric Feature by Target', fontsize=16)
-
-
-
-# Display all plots in Streamlit
-st.pyplot(fig)
 
 
 
