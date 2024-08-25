@@ -216,8 +216,6 @@ ax.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
 st.pyplot(fig)
 
 
-import matplotlib.pyplot as plt
-import streamlit as st
 
 # Assuming df is your DataFrame and symptom_counts is already calculated
 symptom_counts = df.iloc[:, :-1].sum()
@@ -247,10 +245,6 @@ ax.set_title('Histogram of Symptom Frequencies')
 ax.set_xlabel('Frequency')
 st.pyplot(fig)
 
-import numpy as np
-import seaborn as sns
-import matplotlib.pyplot as plt
-import streamlit as st
 
 # Assuming df is your DataFrame
 numeric_df = df.select_dtypes(include=[np.number])  # Select only numeric columns
@@ -279,14 +273,24 @@ ax.set_title('Correlation Heatmap of Numeric Features', fontsize=16)
 st.pyplot(fig)
 
 
-# Line Chart of Feature Values (if applicable)
-fig, ax = plt.subplots()
-# Assuming you have a time series or multiple entries for this example
+
+# Assuming df is your DataFrame and you're plotting the mean of feature values
+fig, ax = plt.subplots(figsize=(12, 6))  # Increase the size for better label visibility
+
+# Plot the line chart
 df.iloc[:, :-1].mean().plot(kind='line', ax=ax, marker='o', color='darkgreen')
-ax.set_title('Average Feature Values')
-ax.set_xlabel('Feature')
-ax.set_ylabel('Average Value')
+
+# Rotate x-axis labels
+ax.set_xticklabels(ax.get_xticklabels(), rotation=45, ha='right')
+
+# Set titles and labels
+ax.set_title('Average Feature Values', fontsize=16)
+ax.set_xlabel('Feature', fontsize=14)
+ax.set_ylabel('Average Value', fontsize=14)
+
+# Display the plot in Streamlit
 st.pyplot(fig)
+
 
 # Disease Distribution Pie Chart
 disease_distribution = df['prognosis'].value_counts()
