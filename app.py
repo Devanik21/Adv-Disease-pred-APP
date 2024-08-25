@@ -35,146 +35,6 @@ st.image("DNA.jpg", caption="Health and Wellness", use_column_width=True)
 # Sidebar for user input
 st.sidebar.header("🔍 Input Features")
 
-disease_severity = {
-    'Sudden Fever': 'High',
-    'Headache': 'Medium',
-    'Mouth Bleed': 'Severe',
-    'Nose Bleed': 'Moderate',
-    'Muscle Pain': 'Low',
-    'Joint Pain': 'Medium',
-    'Vomiting': 'High',
-    'Rash': 'Low',
-    'Diarrhea': 'Moderate',
-    'Hypotension': 'High',
-    'Pleural Effusion': 'Severe',
-    'Ascites': 'Severe',
-    'Gastro Bleeding': 'Severe',
-    'Swelling': 'Moderate',
-    'Nausea': 'Medium',
-    'Chills': 'Low',
-    'Myalgia': 'Medium',
-    'Digestion Trouble': 'Moderate',
-    'Fatigue': 'Medium',
-    'Skin Lesions': 'Moderate',
-    'Stomach Pain': 'Moderate',
-    'Orbital Pain': 'Medium',
-    'Neck Pain': 'Low',
-    'Weakness': 'High',
-    'Back Pain': 'Low',
-    'Weight Loss': 'Moderate',
-    'Gum Bleed': 'Severe',
-    'Jaundice': 'Severe',
-    'Coma': 'Critical',
-    'Dizziness': 'Medium',
-    'Inflammation': 'Moderate',
-    'Red Eyes': 'Medium',
-    'Loss of Appetite': 'Medium',
-    'Urination Loss': 'Severe',
-    'Slow Heart Rate': 'High',
-    'Abdominal Pain': 'Moderate',
-    'Light Sensitivity': 'Low',
-    'Yellow Skin': 'Severe',
-    'Yellow Eyes': 'Severe',
-    'Facial Distortion': 'Severe',
-    'Microcephaly': 'Critical',
-    'Rigor': 'High',
-    'Bitter Tongue': 'Medium',
-    'Convulsion': 'Critical',
-    'Anemia': 'Moderate',
-    'Cocacola Urine': 'Severe',
-    'Hypoglycemia': 'High',
-    'Prostraction': 'Critical',
-    'Hyperpyrexia': 'Critical',
-    'Stiff Neck': 'High',
-    'Irritability': 'Medium',
-    'Confusion': 'Severe',
-    'Tremor': 'Medium',
-    'Paralysis': 'Critical',
-    'Lymph Swells': 'Moderate',
-    'Breathing Restriction': 'Severe',
-    'Toe Inflammation': 'Low',
-    'Finger Inflammation': 'Low',
-    'Lips Irritation': 'Low',
-    'Itchiness': 'Low',
-    'Ulcers': 'Moderate',
-    'Toenail Loss': 'Low',
-    'Speech Problem': 'Severe',
-    'Bullseye Rash': 'Moderate',
-    'Dengue': 'Severe',
-    'Chikungunya':'Critical',
-    'Tungiasis' : 'Moderate'
-}
-disease_colors = {
-    'Sudden Fever': '#FF4500',
-    'Headache': '#FF6347',
-    'Mouth Bleed': '#FFD700',
-    'Nose Bleed': '#DAA520',
-    'Muscle Pain': '#FF8C00',
-    'Joint Pain': '#FF1493',
-    'Vomiting': '#FF69B4',
-    'Rash': '#FFB6C1',
-    'Diarrhea': '#FF6347',
-    'Hypotension': '#FF4500',
-    'Pleural Effusion': '#FF69B4',
-    'Ascites': '#FF69B4',
-    'Gastro Bleeding': '#FF69B4',
-    'Swelling': '#DAA520',
-    'Nausea': '#FF6347',
-    'Chills': '#FFB6C1',
-    'Myalgia': '#FF6347',
-    'Digestion Trouble': '#DAA520',
-    'Fatigue': '#FF6347',
-    'Skin Lesions': '#DAA520',
-    'Stomach Pain': '#DAA520',
-    'Orbital Pain': '#FF6347',
-    'Neck Pain': '#FFB6C1',
-    'Weakness': '#FF4500',
-    'Back Pain': '#FFB6C1',
-    'Weight Loss': '#DAA520',
-    'Gum Bleed': '#FF69B4',
-    'Jaundice': '#FF69B4',
-    'Coma': '#FF0000',
-    'Dizziness': '#FF6347',
-    'Inflammation': '#DAA520',
-    'Red Eyes': '#FF6347',
-    'Loss of Appetite': '#FF6347',
-    'Urination Loss': '#FF69B4',
-    'Slow Heart Rate': '#FF4500',
-    'Abdominal Pain': '#DAA520',
-    'Light Sensitivity': '#FFB6C1',
-    'Yellow Skin': '#FF69B4',
-    'Yellow Eyes': '#FF69B4',
-    'Facial Distortion': '#FF69B4',
-    'Microcephaly': '#FF0000',
-    'Rigor': '#FF4500',
-    'Bitter Tongue': '#FF6347',
-    'Convulsion': '#FF0000',
-    'Anemia': '#DAA520',
-    'Cocacola Urine': '#FF69B4',
-    'Hypoglycemia': '#FF4500',
-    'Prostraction': '#FF0000',
-    'Hyperpyrexia': '#FF0000',
-    'Stiff Neck': '#FF4500',
-    'Irritability': '#FF6347',
-    'Confusion': '#FF69B4',
-    'Tremor': '#FF6347',
-    'Paralysis': '#FF0000',
-    'Lymph Swells': '#DAA520',
-    'Breathing Restriction': '#FF69B4',
-    'Toe Inflammation': '#FFB6C1',
-    'Finger Inflammation': '#FFB6C1',
-    'Lips Irritation': '#FFB6C1',
-    'Itchiness': '#FFB6C1',
-    'Ulcers': '#DAA520',
-    'Toenail Loss': '#FFB6C1',
-    'Speech Problem': '#FF69B4',
-    'Bullseye Rash': '#DAA520',
-    'Dengue': '#FF69B4',
-    'Chikungunya': '#DAA520',
-    'Tungiasis' : '#FF69B4' 
-}
-# Define colors and severity mappings
-
 def user_input_features():
     features = {}
     for col in df.columns[:-1]:  # Exclude the target column
@@ -205,7 +65,6 @@ color, severity = get_color_and_severity(disease)
 st.markdown(f'<h2 style="color:{color};">🩺 The predicted disease based on the input features is: <strong>{disease}</strong></h2>', unsafe_allow_html=True)
 st.markdown(f'<h3 style="color:{severity_colors.get(severity, "#000000")};">Severity: <strong>{severity}</strong></h3>', unsafe_allow_html=True)
 
-
 st.subheader('🛩️Advanced Visualizations')
 
 # Add a pie chart for severity distribution
@@ -215,28 +74,15 @@ ax.pie(severity_counts.values(), labels=severity_counts.keys(), autopct='%1.1f%%
 ax.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
 st.pyplot(fig)
 
-
-
-# Assuming df is your DataFrame and symptom_counts is already calculated
+# Bar chart of symptom frequencies
 symptom_counts = df.iloc[:, :-1].sum()
-
-# Increase figure size for better label visibility
 fig, ax = plt.subplots(figsize=(12, 6))  # Adjust the size as needed
-
-# Plot bar chart
 symptom_counts.plot(kind='bar', ax=ax, color='skyblue')
-
-# Rotate x-axis labels
 ax.set_xticklabels(ax.get_xticklabels(), rotation=45, ha='right')
-
-# Set titles and labels
 ax.set_title('Frequency of Symptoms in Dataset')
 ax.set_xlabel('Symptom')
 ax.set_ylabel('Frequency')
-
-# Display the plot in Streamlit
 st.pyplot(fig)
-
 
 # Histogram of Symptoms
 fig, ax = plt.subplots()
@@ -245,48 +91,32 @@ ax.set_title('Histogram of Symptom Frequencies')
 ax.set_xlabel('Frequency')
 st.pyplot(fig)
 
-
-# Assuming df is your DataFrame
+# Correlation Heatmap for Numeric Columns
 numeric_df = df.select_dtypes(include=[np.number])  # Select only numeric columns
-
-# Create a figure with subplots
-fig, axs = plt.subplots(2, 2, figsize=(18, 16))  # Adjust size as needed
-
-# Plot 1: Correlation Heatmap
+fig, ax = plt.subplots(figsize=(14, 10))  # Adjust the size as needed
 corr_matrix = numeric_df.corr()
 mask = np.triu(np.ones_like(corr_matrix, dtype=bool))
 sns.heatmap(
     corr_matrix,
+    mask=mask,
     annot=True,
     cmap='coolwarm',
-    ax=axs[0, 0],
+    ax=ax,
     fmt='.2f',
     annot_kws={"size": 8},
     cbar_kws={"shrink": .8}
 )
-axs[0, 0].set_title('Correlation Heatmap of Numeric Features', fontsize=16)
+ax.set_title('Correlation Heatmap of Numeric Features', fontsize=16)
 st.pyplot(fig)
 
-
-
-
-# Assuming df is your DataFrame and you're plotting the mean of feature values
+# Average Feature Values Line Chart
 fig, ax = plt.subplots(figsize=(12, 6))  # Increase the size for better label visibility
-
-# Plot the line chart
 df.iloc[:, :-1].mean().plot(kind='line', ax=ax, marker='o', color='darkgreen')
-
-# Rotate x-axis labels
 ax.set_xticklabels(ax.get_xticklabels(), rotation=45, ha='right')
-
-# Set titles and labels
 ax.set_title('Average Feature Values', fontsize=16)
 ax.set_xlabel('Feature', fontsize=14)
 ax.set_ylabel('Average Value', fontsize=14)
-
-# Display the plot in Streamlit
 st.pyplot(fig)
-
 
 # Disease Distribution Pie Chart
 disease_distribution = df['prognosis'].value_counts()
@@ -296,16 +126,13 @@ ax.axis('equal')
 ax.set_title('Distribution of Diseases in Dataset')
 st.pyplot(fig)
 
-
-
-
 # User feedback
 st.subheader("📝 Feedback")
 feedback = st.text_area("Share your feedback or suggestions:", height=150)
 if st.button('Submit Feedback'):
     st.success("Thank you for your feedback!")
 
-# Optionally, add interactive elements or more dynamic content
+# Additional notes
 st.markdown("""
     <h4 style="text-align:center; color:#808080;">
         <strong>Note:</strong> The prediction is based on the model's analysis of the provided symptoms. For accurate diagnosis, please consult a healthcare professional. 
