@@ -2,8 +2,6 @@ import streamlit as st
 import pandas as pd
 import joblib
 import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
 
 # Load the dataset
 df = pd.read_csv("disease.csv")  # Update with the correct path if needed
@@ -21,12 +19,12 @@ st.set_page_config(
 
 # Define colors and severity mappings
 severity_colors = {
-    'Low': '#90EE90',
-    'Medium': '#FFFF00',
-    'High': '#FF6347',
-    'Moderate': '#FFA07A',
-    'Severe': '#FF4500',
-    'Critical': '#FF0000'
+    'Low': '#90EE90',        # Light Green
+    'Medium': '#FFFF00',     # Yellow
+    'High': '#FF6347',       # Tomato
+    'Moderate': '#FFA07A',   # Light Salmon
+    'Severe': '#FF4500',     # Orange Red
+    'Critical': '#FF0000'    # Red
 }
 
 disease_colors = {
@@ -97,7 +95,6 @@ disease_colors = {
     'Dengue': '#FF69B4',
     'Chikungunya': '#DAA520'
 }
-
 
 disease_severity = {
     'Sudden Fever': 'High',
@@ -208,9 +205,14 @@ st.markdown('<div class="title">🧬 Disease Prediction Web App </div>', unsafe_
 st.sidebar.header("🔍 Input Features")
 
 def user_input_features():
+    # Create a dictionary to hold feature inputs
     features = {}
+    
+    # Assuming the last column is 'prognosis' and the rest are features
     for col in df.columns[:-1]:  # Exclude the target column
+        # All features are binary (0 or 1), so use a slider with values 0 and 1
         features[col] = st.sidebar.slider(f"{col}", 0, 1, 0)
+
     input_df = pd.DataFrame(features, index=[0])
     return input_df
 
@@ -223,13 +225,15 @@ st.write(input_df)
 
 # Show loading spinner
 with st.spinner('🔍 Making prediction...'):
+    # Make prediction
     prediction = model.predict(input_df)
 
 # Display the prediction result
 st.subheader('🎯 Prediction Result')
 
+# Display prediction with dynamic color and severity
 def get_color_and_severity(disease):
-    color = disease_colors.get(disease, '#000000')
+    color = disease_colors.get(disease, '#000000')  # Default to black if not found
     severity = disease_severity.get(disease, 'Unknown')
     return color, severity
 
@@ -239,50 +243,12 @@ color, severity = get_color_and_severity(disease)
 st.markdown(f'<div class="result" style="color:{color};">🩺 The predicted disease based on the input features is: <strong>{disease}</strong></div>', unsafe_allow_html=True)
 st.markdown(f'<div class="result" style="color:{severity_colors.get(severity, "#000000")};">Severity: <strong>{severity}</strong></div>', unsafe_allow_html=True)
 
+# Optionally, you can add more details or a description below the result
 st.markdown("""
     <div class="note">
         <strong>Note:</strong> The prediction is based on the model's analysis of the provided symptoms. For accurate diagnosis, please consult a healthcare professional. 
     </div>
     """, unsafe_allow_html=True)
 
+# Add an image or additional content
 st.image("DNA.jpg", caption="Health and Wellness", use_column_width=True)
-
-# Visualization: Feature Importance
-st.subheader("📊 Feature Importance")
-selected_features = st.sidebar.multiselect("Select features for importance visualization", df.columns[:-1], default=df.columns[:-1])
-
-if selected_features and st.sidebar.checkbox("Show Feature Importance"):
-    feature_importance = model.feature_importances_
-    
-    # Get indices of the selected features
-    selected_indices = [df.columns.get_loc(col) for col in selected_features]
-    
-    # Extract the importance of the selected features
-    selected_importances = feature_importance[selected_indices]
-    
-    # Sort the features by importance
-    sorted_idx = np.argsort(selected_importances)
-    
-    # Convert selected features to a numpy array and apply sorting
-    sorted_features = np.array(selected_features)[sorted_idx]
-    sorted_importances = selected_importances[sorted_idx]
-    
-    # Plot the feature importance
-    plt.figure(figsize=(10, 8))
-    plt.barh(sorted_features, sorted_importances, color="skyblue")
-    plt.xlabel("Importance")
-    plt.title("Feature Importance")
-    st.pyplot(plt)
-
-
-# Visualization: Correlation Matrix
-st.subheader("📊 Correlation Matrix")
-selected_corr_features = st.sidebar.multiselect("Select features for correlation matrix", df.columns[:-1], default=df.columns[:-1])
-
-if selected_corr_features and st.sidebar.checkbox("Show Correlation Matrix"):
-    corr = df[selected_corr_features].corr()
-    
-    plt.figure(figsize=(12, 10))
-    sns.heatmap(corr, annot=True, cmap="coolwarm", fmt=".2f", square=True)
-    plt.title("Feature Correlation Matrix")
-    st.pyplot(plt)
