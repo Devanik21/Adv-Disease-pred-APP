@@ -245,17 +245,9 @@ ax.set_title('Histogram of Symptom Frequencies')
 ax.set_xlabel('Frequency')
 st.pyplot(fig)
 
+
 # Assuming df is your DataFrame
 numeric_df = df.select_dtypes(include=[np.number])  # Select only numeric columns
-
-# Get list of numeric columns
-numeric_columns = numeric_df.columns.tolist()
-
-# Streamlit user input
-selected_numeric_column = st.selectbox('Select a Numeric Column for Violin Plot:', numeric_columns)
-
-# Define target column
-categorical_column = 'prognosis'  # Replace with your target column
 
 # Create a figure with subplots
 fig, axs = plt.subplots(2, 2, figsize=(18, 16))  # Adjust size as needed
@@ -265,7 +257,6 @@ corr_matrix = numeric_df.corr()
 mask = np.triu(np.ones_like(corr_matrix, dtype=bool))
 sns.heatmap(
     corr_matrix,
-    mask=mask,
     annot=True,
     cmap='coolwarm',
     ax=axs[0, 0],
@@ -275,22 +266,8 @@ sns.heatmap(
 )
 axs[0, 0].set_title('Correlation Heatmap of Numeric Features', fontsize=16)
 
-# Plot 2: Violin Plot based on user selection
-sns.violinplot(data=df, x=categorical_column, y=selected_numeric_column, ax=axs[0, 1], palette='viridis')
-axs[0, 1].set_title(f'Violin Plot of {selected_numeric_column} by Prognosis', fontsize=16)
 
-# Plot 3: Box Plot
-sns.boxplot(data=df, x=categorical_column, y=selected_numeric_column, ax=axs[1, 0], palette='viridis')
-axs[1, 0].set_title(f'Box Plot of {selected_numeric_column} by Prognosis', fontsize=16)
 
-# Plot 4: Pair Plot (use a subset of features if too many)
-subset_df = numeric_df[['sudden_fever', 'headache', 'muscle_pain', 'vomiting']]  # Example subset
-sns.pairplot(subset_df, diag_kind='kde', plot_kws={'alpha': 0.7}, corner=True)
-plt.tight_layout()
-plt.show()  # Display pairplot separately
-
-# Display all plots in Streamlit
-st.pyplot(fig)
 
 # Assuming df is your DataFrame and you're plotting the mean of feature values
 fig, ax = plt.subplots(figsize=(12, 6))  # Increase the size for better label visibility
@@ -318,6 +295,9 @@ ax.axis('equal')
 ax.set_title('Distribution of Diseases in Dataset')
 st.pyplot(fig)
 
+# Plot 3: Box Plot
+sns.boxplot(data=df, x='target', y='numeric_feature', ax=axs[1, 0], palette='viridis')
+axs[1, 0].set_title('Box Plot of Numeric Feature by Target', fontsize=16)
 
 
 
