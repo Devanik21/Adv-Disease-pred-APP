@@ -2,6 +2,8 @@ import streamlit as st
 import pandas as pd
 import joblib
 import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 # Load the dataset
 df = pd.read_csv("disease.csv")  # Update with the correct path if needed
@@ -205,14 +207,9 @@ st.markdown('<div class="title">🧬 Disease Prediction Web App </div>', unsafe_
 st.sidebar.header("🔍 Input Features")
 
 def user_input_features():
-    # Create a dictionary to hold feature inputs
     features = {}
-    
-    # Assuming the last column is 'prognosis' and the rest are features
     for col in df.columns[:-1]:  # Exclude the target column
-        # All features are binary (0 or 1), so use a slider with values 0 and 1
         features[col] = st.sidebar.slider(f"{col}", 0, 1, 0)
-
     input_df = pd.DataFrame(features, index=[0])
     return input_df
 
@@ -225,7 +222,6 @@ st.write(input_df)
 
 # Show loading spinner
 with st.spinner('🔍 Making prediction...'):
-    # Make prediction
     prediction = model.predict(input_df)
 
 # Display the prediction result
@@ -243,7 +239,6 @@ color, severity = get_color_and_severity(disease)
 st.markdown(f'<div class="result" style="color:{color};">🩺 The predicted disease based on the input features is: <strong>{disease}</strong></div>', unsafe_allow_html=True)
 st.markdown(f'<div class="result" style="color:{severity_colors.get(severity, "#000000")};">Severity: <strong>{severity}</strong></div>', unsafe_allow_html=True)
 
-# Optionally, you can add more details or a description below the result
 st.markdown("""
     <div class="note">
         <strong>Note:</strong> The prediction is based on the model's analysis of the provided symptoms. For accurate diagnosis, please consult a healthcare professional. 
@@ -252,3 +247,23 @@ st.markdown("""
 
 # Add an image or additional content
 st.image("DNA.jpg", caption="Health and Wellness", use_column_width=True)
+
+# Visualization: Feature Importance
+st.subheader("📊 Feature Importance")
+if st.sidebar.checkbox("Show Feature Importance"):
+    feature_importance = model.feature_importances_
+    sorted_idx = np.argsort(feature_importance)
+    plt.figure(figsize=(10, 8))
+    plt.barh(df.columns[:-1][sorted_idx], feature_importance[sorted_idx], color="skyblue")
+    plt.xlabel("Importance")
+    plt.title("Feature Importance")
+    st.pyplot(plt)
+
+# Visualization: Correlation Matrix
+st.subheader("📊 Correlation Matrix")
+if st.sidebar.checkbox("Show Correlation Matrix"):
+    corr = df.corr()
+    plt.figure(figsize=(12, 10))
+    sns.heatmap(corr, annot=True, cmap="coolwarm", fmt=".2f", square=True)
+    plt.title("Feature Correlation Matrix")
+    st.pyplot(plt)
