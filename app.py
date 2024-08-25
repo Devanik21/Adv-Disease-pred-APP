@@ -3,7 +3,7 @@ import pandas as pd
 import joblib
 import numpy as np
 import matplotlib.pyplot as plt
-
+import seaborn as sns
 # Load the dataset
 df = pd.read_csv("disease.csv")  # Update with the correct path if needed
 
