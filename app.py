@@ -3,6 +3,8 @@ import pandas as pd
 import joblib
 import numpy as np
 import matplotlib.pyplot as plt
+# Add an image or additional content
+st.image("Bio.jpg",  use_column_width=True)
 
 # Load the dataset
 df = pd.read_csv("disease.csv")  # Update with the correct path if needed
