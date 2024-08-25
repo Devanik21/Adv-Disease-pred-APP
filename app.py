@@ -209,14 +209,15 @@ st.pyplot(fig)
 st.markdown(f'<h2 style="color:{color};">🩺 The predicted disease based on the input features is: <strong>{disease}</strong></h2>', unsafe_allow_html=True)
 st.markdown(f'<h3 style="color:{severity_colors.get(severity, "#000000")};">Severity: <strong>{severity}</strong></h3>', unsafe_allow_html=True)
 
+
+# Add an image or additional content
+st.image("DNA.jpg", caption="Health and Wellness", use_column_width=True)
+
 # User feedback
 st.subheader("📝 Feedback")
 feedback = st.text_area("Share your feedback or suggestions:", height=150)
 if st.button('Submit Feedback'):
     st.success("Thank you for your feedback!")
-
-# Add an image or additional content
-st.image("DNA.jpg", caption="Health and Wellness", use_column_width=True)
 
 # Optionally, add interactive elements or more dynamic content
 st.markdown("""
