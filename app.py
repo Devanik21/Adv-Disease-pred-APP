@@ -246,43 +246,42 @@ ax.set_xlabel('Frequency')
 st.pyplot(fig)
 
 
-import numpy as np
-import seaborn as sns
-import matplotlib.pyplot as plt
-import streamlit as st
-
 # Assuming df is your DataFrame
 numeric_df = df.select_dtypes(include=[np.number])  # Select only numeric columns
 
-# Increase figure size
-fig, ax = plt.subplots(figsize=(16, 14))  # Adjust size as needed
+# Create a figure with subplots
+fig, axs = plt.subplots(2, 2, figsize=(18, 16))  # Adjust size as needed
 
-# Calculate correlation matrix
+# Plot 1: Correlation Heatmap
 corr_matrix = numeric_df.corr()
-
-# Mask the upper triangle of the heatmap
 mask = np.triu(np.ones_like(corr_matrix, dtype=bool))
-
-# Create a heatmap with improved aesthetics
 sns.heatmap(
     corr_matrix,
-     # Apply mask to upper triangle
     annot=True,
     cmap='coolwarm',
-    ax=ax,
-    fmt='.2f',  # Format for annotations
-    annot_kws={"size": 6},  # Smaller font size for annotations
-    cbar_kws={"shrink": .8}  # Adjust colorbar size
+    ax=axs[0, 0],
+    fmt='.2f',
+    annot_kws={"size": 8},
+    cbar_kws={"shrink": .8}
 )
+axs[0, 0].set_title('Correlation Heatmap of Numeric Features', fontsize=16)
 
-# Set x-axis and y-axis labels
-ax.set_xticklabels(ax.get_xticklabels(), rotation=45, ha='right', fontsize=10)
-ax.set_yticklabels(ax.get_yticklabels(), rotation=0, fontsize=10)
+# Plot 2: Violin Plot
+# Assuming 'target' is a categorical column or adjust accordingly
+sns.violinplot(data=df, x='target', y='numeric_feature', ax=axs[0, 1], palette='viridis')
+axs[0, 1].set_title('Violin Plot of Numeric Feature by Target', fontsize=16)
 
-# Set title
-ax.set_title('Correlation Heatmap of Numeric Features', fontsize=18)
+# Plot 3: Box Plot
+sns.boxplot(data=df, x='target', y='numeric_feature', ax=axs[1, 0], palette='viridis')
+axs[1, 0].set_title('Box Plot of Numeric Feature by Target', fontsize=16)
 
-# Display the plot in Streamlit
+# Plot 4: Pair Plot
+sns.pairplot(numeric_df, diag_kind='kde', plot_kws={'alpha': 0.7}, corner=True)
+# Need to use plt.subplots() as pairplot does not fit into axs
+plt.tight_layout()
+plt.show()  # Display pairplot separately
+
+# Display all plots in Streamlit
 st.pyplot(fig)
 
 
@@ -314,14 +313,6 @@ ax.set_title('Distribution of Diseases in Dataset')
 st.pyplot(fig)
 
 
-# Plot 2: Violin Plot
-# Assuming 'target' is a categorical column or adjust accordingly
-sns.violinplot(data=df, x='target', y='numeric_feature', ax=axs[0, 1], palette='viridis')
-axs[0, 1].set_title('Violin Plot of Numeric Feature by Target', fontsize=16)
-
-# Plot 3: Box Plot
-sns.boxplot(data=df, x='target', y='numeric_feature', ax=axs[1, 0], palette='viridis')
-axs[1, 0].set_title('Box Plot of Numeric Feature by Target', fontsize=16)
 
 
 # User feedback
