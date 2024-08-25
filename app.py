@@ -226,4 +226,4 @@ st.markdown("""
     </h4>
     """, unsafe_allow_html=True)
 # Add an image or additional content
-st.image("DNA.jpg", caption="Health and Wellness", use_column_width=True)
+st.image("bio.jpg", caption="Health and Wellness", use_column_width=True)
