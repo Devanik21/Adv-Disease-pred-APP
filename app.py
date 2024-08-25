@@ -266,12 +266,12 @@ mask = np.triu(np.ones_like(corr_matrix, dtype=bool))
 # Create a heatmap with improved aesthetics
 sns.heatmap(
     corr_matrix,
-    mask=mask,  # Apply mask to upper triangle
+     # Apply mask to upper triangle
     annot=True,
     cmap='coolwarm',
     ax=ax,
     fmt='.2f',  # Format for annotations
-    annot_kws={"size": 8},  # Smaller font size for annotations
+    annot_kws={"size": 6},  # Smaller font size for annotations
     cbar_kws={"shrink": .8}  # Adjust colorbar size
 )
 
