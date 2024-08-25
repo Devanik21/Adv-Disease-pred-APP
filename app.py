@@ -185,6 +185,8 @@ input_df = user_input_features()
 # Display user input
 st.subheader('📊 User Input Features')
 st.write(input_df)
+# Add an image or additional content
+st.image("DNA.jpg", caption="Health and Wellness", use_column_width=True)
 
 # Show loading spinner
 with st.spinner('🔍 Making prediction...'):
@@ -225,5 +227,3 @@ st.markdown("""
         <strong>Note:</strong> The prediction is based on the model's analysis of the provided symptoms. For accurate diagnosis, please consult a healthcare professional. 
     </h4>
     """, unsafe_allow_html=True)
-# Add an image or additional content
-st.image("DNA.jpg", caption="Health and Wellness", use_column_width=True)
