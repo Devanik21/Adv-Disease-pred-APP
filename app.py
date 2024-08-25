@@ -202,6 +202,8 @@ def get_color_and_severity(disease):
 
 disease = prediction[0]
 color, severity = get_color_and_severity(disease)
+st.markdown(f'<h2 style="color:{color};">🩺 The predicted disease based on the input features is: <strong>{disease}</strong></h2>', unsafe_allow_html=True)
+st.markdown(f'<h3 style="color:{severity_colors.get(severity, "#000000")};">Severity: <strong>{severity}</strong></h3>', unsafe_allow_html=True)
 
 # Add a pie chart for severity distribution
 severity_counts = {k: list(disease_severity.values()).count(k) for k in set(disease_severity.values())}
@@ -210,8 +212,6 @@ ax.pie(severity_counts.values(), labels=severity_counts.keys(), autopct='%1.1f%%
 ax.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
 st.pyplot(fig)
 
-st.markdown(f'<h2 style="color:{color};">🩺 The predicted disease based on the input features is: <strong>{disease}</strong></h2>', unsafe_allow_html=True)
-st.markdown(f'<h3 style="color:{severity_colors.get(severity, "#000000")};">Severity: <strong>{severity}</strong></h3>', unsafe_allow_html=True)
 
 
 
