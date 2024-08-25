@@ -160,7 +160,15 @@ disease_colors = {
     'Dengue': '#FF69B4',
     'Chikungunya': '#DAA520'
 }
-
+# Define colors and severity mappings
+severity_colors = {
+    'Low': '#90EE90',        # Light Green
+    'Medium': '#FFFF00',     # Yellow
+    'High': '#FF6347',       # Tomato
+    'Moderate': '#FFA07A',   # Light Salmon
+    'Severe': '#FF4500',     # Orange Red
+    'Critical': '#FF0000'    # Red
+}
 def user_input_features():
     features = {}
     for col in df.columns[:-1]:  # Exclude the target column
