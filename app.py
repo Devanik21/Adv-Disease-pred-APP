@@ -216,6 +216,48 @@ ax.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
 st.pyplot(fig)
 
 
+# Bar Chart of Symptom Frequencies
+symptom_counts = df.iloc[:, :-1].sum()
+fig, ax = plt.subplots()
+symptom_counts.plot(kind='bar', ax=ax, color='skyblue')
+ax.set_title('Frequency of Symptoms in Dataset')
+ax.set_xlabel('Symptom')
+ax.set_ylabel('Frequency')
+st.pyplot(fig)
+
+# Histogram of Symptoms
+fig, ax = plt.subplots()
+df.iloc[:, :-1].sum(axis=0).plot(kind='hist', bins=30, ax=ax, color='lightcoral', edgecolor='black')
+ax.set_title('Histogram of Symptom Frequencies')
+ax.set_xlabel('Frequency')
+st.pyplot(fig)
+
+# Correlation Heatmap for Numeric Columns
+numeric_df = df.select_dtypes(include=[np.number])  # Select only numeric columns
+fig, ax = plt.subplots()
+corr_matrix = numeric_df.corr()
+sns.heatmap(corr_matrix, annot=True, cmap='coolwarm', ax=ax)
+ax.set_title('Correlation Heatmap of Numeric Features')
+st.pyplot(fig)
+
+# Line Chart of Feature Values (if applicable)
+fig, ax = plt.subplots()
+# Assuming you have a time series or multiple entries for this example
+df.iloc[:, :-1].mean().plot(kind='line', ax=ax, marker='o', color='darkgreen')
+ax.set_title('Average Feature Values')
+ax.set_xlabel('Feature')
+ax.set_ylabel('Average Value')
+st.pyplot(fig)
+
+# Disease Distribution Pie Chart
+disease_distribution = df['prognosis'].value_counts()
+fig, ax = plt.subplots()
+ax.pie(disease_distribution, labels=disease_distribution.index, autopct='%1.1f%%', startangle=140)
+ax.axis('equal')
+ax.set_title('Distribution of Diseases in Dataset')
+st.pyplot(fig)
+
+
 
 
 # User feedback
