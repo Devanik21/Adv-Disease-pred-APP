@@ -167,7 +167,7 @@ disease_colors = {
     'Bullseye Rash': '#DAA520',
     'Dengue': '#FF69B4',
     'Chikungunya': '#DAA520',
-    'Tungiasis' : 'FF69B4' 
+    'Tungiasis' : '#FF69B4' 
 }
 # Define colors and severity mappings
 
