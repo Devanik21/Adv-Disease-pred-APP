@@ -273,7 +273,7 @@ sns.heatmap(
     fmt='.2f',
     annot_kws={"size": 5},  # Smaller font size for annotations
     cbar_kws={"shrink": .8},
-    mask=mask
+   
 )
 
 # Rotate the labels for better readability
