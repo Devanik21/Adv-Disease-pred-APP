@@ -244,21 +244,43 @@ ax.set_title('Histogram of Symptom Frequencies')
 ax.set_xlabel('Frequency')
 st.pyplot(fig)
 
+import streamlit as st
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Assuming you have already loaded your dataset as df
+
 # Correlation Heatmap
 numeric_df = df.select_dtypes(include=[np.number])  # Select only numeric columns
-fig, ax = plt.subplots(figsize=(12, 10))  # Adjust size as needed
+
+# Increase the size of the figure to accommodate many columns
+fig, ax = plt.subplots(figsize=(16, 12))  # Larger size for more columns
+
+# Compute the correlation matrix
 corr_matrix = numeric_df.corr()
-mask = np.triu(np.ones_like(corr_matrix, dtype=bool))  # Mask for the upper triangle
+
+# Mask for the upper triangle
+mask = np.triu(np.ones_like(corr_matrix, dtype=bool))
+
+# Draw the heatmap
 sns.heatmap(
     corr_matrix,
     annot=True,
     cmap='coolwarm',
     ax=ax,
     fmt='.2f',
-    annot_kws={"size": 6},
+    annot_kws={"size": 5},  # Smaller font size for annotations
     cbar_kws={"shrink": .8},
-
+    mask=mask
 )
+
+# Rotate the labels for better readability
+ax.set_xticklabels(ax.get_xticklabels(), rotation=45, ha='right', fontsize=8)
+ax.set_yticklabels(ax.get_yticklabels(), rotation=0, fontsize=8)
+
+# Set title
 ax.set_title('Correlation Heatmap of Numeric Features', fontsize=16)
 
 # Display the heatmap in Streamlit
