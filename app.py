@@ -255,9 +255,9 @@ sns.heatmap(
     cmap='coolwarm',
     ax=ax,
     fmt='.2f',
-    annot_kws={"size": 8},
+    annot_kws={"size": 6},
     cbar_kws={"shrink": .8},
-    mask=mask
+
 )
 ax.set_title('Correlation Heatmap of Numeric Features', fontsize=16)
 
