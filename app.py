@@ -212,7 +212,7 @@ st.subheader('🛩️Advanced Visualizations')
 
 # Add a pie chart for severity distribution
 severity_counts = {k: list(disease_severity.values()).count(k) for k in set(disease_severity.values())}
-fig, ax = plt.subplots(figsize=(16, 12))
+fig, ax = plt.subplots(figsize=(12, 10))
 ax.pie(severity_counts.values(), labels=severity_counts.keys(), autopct='%1.1f%%', startangle=140)
 ax.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
 st.pyplot(fig)
@@ -238,17 +238,12 @@ ax.set_ylabel('Frequency')
 st.pyplot(fig)
 
 # Histogram of Symptoms
-fig, ax = plt.subplots(figsize=(16, 12))
+fig, ax = plt.subplots(figsize=(14, 12))
 df.iloc[:, :-1].sum(axis=0).plot(kind='hist', bins=30, ax=ax, color='lightcoral', edgecolor='black')
 ax.set_title('Histogram of Symptom Frequencies')
 ax.set_xlabel('Frequency')
 st.pyplot(fig)
 
-import streamlit as st
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
 
 # Assuming you have already loaded your dataset as df
 
@@ -271,7 +266,7 @@ sns.heatmap(
     cmap='coolwarm',
     ax=ax,
     fmt='.2f',
-    annot_kws={"size": 5},  # Smaller font size for annotations
+    annot_kws={"size": 8},  # Smaller font size for annotations
     cbar_kws={"shrink": .8},
    
 )
@@ -287,7 +282,7 @@ ax.set_title('Correlation Heatmap of Numeric Features', fontsize=16)
 st.pyplot(fig)
 
 # Line chart of average feature values
-fig, ax = plt.subplots(figsize=(16,12))  # Increase the size for better label visibility
+fig, ax = plt.subplots(figsize=(12,10))  # Increase the size for better label visibility
 df.iloc[:, :-1].mean().plot(kind='line', ax=ax, marker='o', color='darkgreen')
 
 # Rotate x-axis labels
