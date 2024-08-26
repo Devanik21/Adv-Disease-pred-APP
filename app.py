@@ -249,24 +249,27 @@ st.pyplot(fig)
 # Assuming df is your DataFrame
 numeric_df = df.select_dtypes(include=[np.number])  # Select only numeric columns
 
-# Create a figure with subplots
-fig, axs = plt.subplots(2, 2, figsize=(18, 16))  # Adjust size as needed
+# Create a new figure specifically for the heatmap
+fig, ax = plt.subplots(figsize=(12, 10))  # Adjust size as needed
 
-# Plot 1: Correlation Heatmap
+# Plot: Correlation Heatmap
 corr_matrix = numeric_df.corr()
 mask = np.triu(np.ones_like(corr_matrix, dtype=bool))
 sns.heatmap(
     corr_matrix,
     annot=True,
     cmap='coolwarm',
-    ax=axs[0, 0],
+    ax=ax,
     fmt='.2f',
     annot_kws={"size": 8},
-    cbar_kws={"shrink": .8}
+    cbar_kws={"shrink": .8},
+    mask=mask
 )
-axs[0, 0].set_title('Correlation Heatmap of Numeric Features', fontsize=16)
-# Display the plot in Streamlit
+ax.set_title('Correlation Heatmap of Numeric Features', fontsize=16)
+
+# Display the heatmap in Streamlit
 st.pyplot(fig)
+
 
 
 
