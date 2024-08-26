@@ -242,14 +242,3 @@ color, severity = get_color_and_severity(disease)
 
 st.markdown(f'<div class="result" style="color:{color};">🩺 The predicted disease based on the input features is: <strong>{disease}</strong></div>', unsafe_allow_html=True)
 st.markdown(f'<div class="result" style="color:{severity_colors.get(severity, "#000000")};">Severity: <strong>{severity}</strong></div>', unsafe_allow_html=True)
-
-# Optionally, you can add more details or a description below the result
-st.markdown("""
-    <div class="note">
-        <strong>Note:</strong> The prediction is based on the model's analysis of the provided symptoms. For accurate diagnosis, please consult a healthcare professional. 
-    </div>
-    """, unsafe_allow_html=True)
-
-# Add an image or additional content
-st.image("DNA.jpg", caption="Health and Wellness", use_column_width=True)
-
