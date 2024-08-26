@@ -265,7 +265,8 @@ sns.heatmap(
     cbar_kws={"shrink": .8}
 )
 axs[0, 0].set_title('Correlation Heatmap of Numeric Features', fontsize=16)
-
+# Display the plot in Streamlit
+st.pyplot(fig)
 
 
 
