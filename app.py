@@ -266,7 +266,7 @@ sns.heatmap(
     cmap='coolwarm',
     ax=ax,
     fmt='.2f',
-    annot_kws={"size": 8},  # Smaller font size for annotations
+    annot_kws={"size": 6},  # Smaller font size for annotations
     cbar_kws={"shrink": .8},
    
 )
